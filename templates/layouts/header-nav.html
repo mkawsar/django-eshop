@@ -1,0 +1,186 @@
+{% load static %}
+<header id="header" class="header widget-header header-type1 cl-bl">
+    <div class="nav">
+        <div class="header-wrap d-flex">
+            <div id="logo" class="logo d-flex align-items-center logo-customize-bg">
+                <a href="{% url 'dashboard:index' %}" title="Xian"><img src="{% static 'images/logo/03.png' %}" data-width="85"
+                                                       data-height="27" alt="images"
+                                                       data-retina="{% static 'images/logo/03@2x.png' %}"></a>
+            </div>
+            <div class="header-content d-flex flex-grow-1 align-items-center flex-row justify-content-lg-start justify-content-end">
+                <div class="icon-header-wrap-left d-flex justify-content-center">
+                    <div class="wrap-language cl-bl">
+                        <div class="language-name language-current">ENGLISH</div>
+                        <div class="list-flat-chooser">
+                            <ul class="select-name">
+                                <li><a href="#">FRANCE</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wcml-dropdown product wcml-currency-switcher cl-bl">
+                        <div class="wcml-cs-item-toggle">USD</div>
+                        <ul class="wcml-cs-submenu">
+                            <li><a href="#">EUR</a></li>
+                            <li><a href="#">KMF</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-wrap d-flex justify-content-start">
+                    <nav id="main-nav" class="main-nav" role="navigation">
+                        <ul id="menu-main-menu" class="d-flex menu justify-content-start">
+                            <li class="menu-item menu-item-has-children">
+                                <a href="{% url 'dashboard:index' %}">HOME</a>
+                            </li>
+                            <li class="menu-item menu-item-has-children"><a href="#">PRODUCTS</a>
+                                <ul class="sub-menu mega-menu cl-bl">
+                                    <li class="mega-item">
+                                        <h3 class="menu-title"><a href="#">ARCHIVE</a></h3>
+                                        <ul>
+                                            <li><a href="shop-details.html">Shop Details</a></li>
+                                            <li><a href="shop-grid.html">Shop Grid</a></li>
+                                            <li><a href="shop-grid-full-width.html">Shop Grid Full Width</a></li>
+                                            <li><a href="shop-list.html">Shop List</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="mega-item">
+                                        <h3 class="menu-title"><a href="#">PRODUCT SINGLE</a></h3>
+                                        <ul>
+                                            <li><a href="shop-details-sidebar-left.html">Shop Details - Left sidebar</a>
+                                            </li>
+                                            <li><a href="shop-details-sidebar-right.html">Shop Details - Right
+                                                sidebar</a></li>
+                                            <li><a href="shop-grid-sidebar-left.html">Shop Grid - Left sidebar</a></li>
+                                            <li><a href="shop-grid-sidebar-right.html">Shop Grid - Right sidebar</a>
+                                            </li>
+                                            <li><a href="shop-list-sidebar-left.html">Shop List - Left sidebar</a></li>
+                                            <li><a href="shop-list-sidebar-right.html">Shop List - Right sidebar</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="mega-item">
+                                        <h3 class="menu-title"><a href="#">SHOP PAGES</a></h3>
+                                        <ul>
+                                            <li><a href="cart.html">Cart</a></li>
+                                            <li><a href="checkout.html">Chekout</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="mega-item mega-images">
+                                        <h3 class="menu-title"><a href="#">CATEGORIES</a></h3>
+                                        <span><img src="{% static 'images/home1/01.png' %}" alt="images"></span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item"><a href="#">ACCESSORIES</a></li>
+                            <li class="menu-item menu-item-has-children"><a href="#">MORE +</a>
+                                <ul class="sub-menu">
+                                    <li class="menu-item"><a href="login.html">LOGIN</a></li>
+                                    <li class="menu-item"><a href="blog.html">BLOG</a></li>
+                                    <li class="menu-item"><a href="blog-details.html">BLOG DETAILS</a></li>
+                                    <li class="menu-item"><a href="contact-us.html">CONTACT US</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="icon-header-wrap-right d-flex justify-content-end">
+                    <div class="header-item-wrap d-flex justify-content-end">
+                        <div class="indicator indicator-trigger-click">
+                            <a class="icon icon-header-search indicator_button" href="#"><i
+                                    class="fal fa-search"></i></a>
+                            <form action="#" class="search-header-hide">
+                                <input type="search" class="search-product" placeholder="Enter your keyword">
+                            </form>
+                        </div>
+                        <a class="icon icon-header-user" href="login.html"><i class="fal fa-user-alt"></i></a>
+                        <div class="indicator indicator-trigger-click">
+                            <a class="icon icon-header-wishlist indicator_button" href="#"><i class="fal fa-heart"></i></a>
+                            <div class="wishlist-hide">
+                                <div class="wishlist-hide-wrap">
+                                    <ul>
+                                        <li class="item d-flex">
+                                            <div class="thumnail">
+                                                <img src="{% static 'images/shop/55.png' %}" alt="images">
+                                            </div>
+                                            <div class="summary">
+                                                <p>Furniture</p>
+                                                <a href="#" class="item-name">Stool - solid</a>
+                                                <div class="item-price">$999</div>
+                                            </div>
+                                        </li>
+                                        <li class="item d-flex">
+                                            <div class="thumnail">
+                                                <img src="{% static 'images/shop/56.png' %}" alt="images">
+                                            </div>
+                                            <div class="summary">
+                                                <p>Furniture</p>
+                                                <a href="#" class="item-name">Lorem Ipsum</a>
+                                                <div class="item-price">$999</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="wishlist-buttons">
+                                        <a href="#" class="hv-bounce-bl">WISHLIST</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="indicator indicator-trigger-click">
+                            <a class="icon icon-header-bag indicator_button" href="#"><i
+                                    class="fal fa-shopping-bag"></i>
+                                <span class="count-cart cl-bl">2</span>
+                            </a>
+                            <div class="mini-cart">
+                                <div class="mini-cart-wrap">
+                                    <ul>
+                                        <li class="item d-flex">
+                                            <div class="thumnail">
+                                                <img src="{% static 'images/shop/55.png' %}" alt="images">
+                                            </div>
+                                            <div class="summary">
+                                                <p>Furniture</p>
+                                                <a href="#" class="item-name">Stool - solid</a>
+                                                <div class="item-price">$999</div>
+                                            </div>
+                                        </li>
+                                        <li class="item d-flex">
+                                            <div class="thumnail">
+                                                <img src="{% static 'images/shop/56.png' %}" alt="images">
+                                            </div>
+                                            <div class="summary">
+                                                <p>Furniture</p>
+                                                <a href="#" class="item-name">Lorem Ipsum</a>
+                                                <div class="item-price">$999</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="mini-cart-total text-right">
+                                        <p>
+                                            <span>SUB TOTAL:</span>
+                                            <span class="total">$1810.00</span>
+                                        </p>
+                                        <p>
+                                            <span>TOTAL:</span>
+                                            <span class="total">$1810.00</span>
+                                        </p>
+                                    </div>
+                                    <div class="mini-cart-buttons">
+                                        <a href="cart.html" class="btn-view-cart hv-bounce-bl">VIEW CART</a>
+                                        <a href="checkout.html" class="btn-checkout hv-bounce-bl">CHECKOUT</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div dir="rtl" class="menu-btn d-flex justify-content-lg-end">
+                    <div class="mobile-header__menu-button">
+                        <div class="line line-1"></div>
+                        <div class="line line-2"></div>
+                        <div class="line line-3"></div>
+                        <div class="line line-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

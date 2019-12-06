@@ -1,0 +1,279 @@
+{% load static %}
+
+<div class="mobile-menu__backdrop"></div>
+<div class="mobile-menu__body">
+    <button class="mobile-menu__close" type="button">
+        <i class="fal fa-times"></i>
+    </button>
+    <div class="mobile-menu__panel">
+        <div class="mobile-menu__panel-header">
+            <div class="mobile-menu__panel-title">MENU</div>
+        </div>
+        <div class="mobile-menu__panel-body">
+            <div class="mobile-menu__settings-list">
+                <div class="mobile-menu__setting" data-mobile-menu-item>
+                    <button class="mobile-menu__setting-button" title="Language" data-mobile-menu-trigger>
+                        <span class="mobile-menu__setting-icon"><img src="{% static 'images/mobile-menu/01.png' %}"
+                                                                     alt="images"></span>
+                        <span class="mobile-menu__setting-title">ENGLISH</span>
+                        <span class="mobile-menu__setting-arrow"></span>
+                    </button>
+                    <div class="mobile-menu__setting-panel" data-mobile-menu-panel>
+                        <div class="mobile-menu__panel mobile-menu__panel--hidden">
+                            <div class="mobile-menu__panel-header">
+                                <button class="mobile-menu__panel-back" type="button">
+                                    <i class="fal fa-angle-left"></i>
+                                </button>
+                                <div class="mobile-menu__panel-title">LANGUAGE</div>
+                            </div>
+                            <div class="mobile-menu__panel-body">
+                                <ul class="mobile-menu__links">
+                                    <li data-mobile-menu-item>
+                                        <button type="button" class="" data-mobile-menu-trigger>
+                                            <span class="mobile-menu__links-image"><img
+                                                    src="{% static 'images/mobile-menu/02.png' %}" alt="images"></span>FRANCE
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile-menu__setting" data-mobile-menu-item>
+                    <button class="mobile-menu__setting-button" title="Currency" data-mobile-menu-trigger>
+                        <span class="mobile-menu__setting-icon mobile-menu__setting-icon--currency">$ </span>
+                        <span class="mobile-menu__setting-title">USD</span>
+                        <span class="mobile-menu__setting-arrow"></span>
+                    </button>
+                    <div class="mobile-menu__setting-panel" data-mobile-menu-panel>
+                        <div class="mobile-menu__panel mobile-menu__panel--hidden">
+                            <div class="mobile-menu__panel-header">
+                                <button class="mobile-menu__panel-back" type="button">
+                                    <i class="fal fa-angle-left"></i>
+                                </button>
+                                <div class="mobile-menu__panel-title">CURRENCY</div>
+                            </div>
+                            <div class="mobile-menu__panel-body">
+                                <ul class="mobile-menu__links">
+                                    <li data-mobile-menu-item>
+                                        <button type="button" class="" data-mobile-menu-trigger>€ EUR</button>
+                                    </li>
+                                    <li data-mobile-menu-item>
+                                        <button type="button" class="" data-mobile-menu-trigger>Fr KMF</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile-menu__divider"></div>
+            <div class="mobile-menu__indicators">
+                <a class="mobile-menu__indicator" href="#">
+                    <span class="mobile-menu__indicator-icon"><i class="fal fa-search"></i></span>
+                    <span class="mobile-menu__indicator-title">Search</span>
+                </a>
+                <a class="mobile-menu__indicator" href="login.html">
+                    <span class="mobile-menu__indicator-icon"><i class="fal fa-user-alt"></i> </span>
+                    <span class="mobile-menu__indicator-title">Account</span>
+                </a>
+                <a class="mobile-menu__indicator" href="#">
+                    <span class="mobile-menu__indicator-icon"><i class="fal fa-heart"></i></span>
+                    <span class="mobile-menu__indicator-title">Wishlist</span>
+                </a>
+                <a class="mobile-menu__indicator" href="cart.html">
+                    <span class="mobile-menu__indicator-icon"><i class="fal fa-shopping-bag"></i><span
+                            class="mobile-menu__indicator-counter">2</span></span>
+                    <span class="mobile-menu__indicator-title">Cart</span></a>
+            </div>
+            <div class="mobile-menu__divider"></div>
+            <ul class="mobile-menu__links">
+                <li data-mobile-menu-item><a href="#" class="active" data-mobile-menu-trigger>HOME<i
+                        class="fal fa-angle-right"></i></a>
+                    <div class="mobile-menu__links-panel" data-mobile-menu-panel>
+                        <div class="mobile-menu__panel mobile-menu__panel--hidden">
+                            <div class="mobile-menu__panel-header">
+                                <button class="mobile-menu__panel-back" type="button">
+                                    <i class="fal fa-angle-left"></i>
+                                </button>
+                                <div class="mobile-menu__panel-title">HOME</div>
+                            </div>
+                            <div class="mobile-menu__panel-body">
+                                <ul class="mobile-menu__links">
+                                    <li data-mobile-menu-item><a href="index.html" class="active"
+                                                                 data-mobile-menu-trigger>HOME 1</a></li>
+                                    <li data-mobile-menu-item><a href="home2.html" class="" data-mobile-menu-trigger>HOME
+                                        2</a></li>
+                                    <li data-mobile-menu-item><a href="home3.html" class="" data-mobile-menu-trigger>HOME
+                                        3</a></li>
+                                    <li data-mobile-menu-item><a href="home4.html" class="" data-mobile-menu-trigger>HOME
+                                        4</a></li>
+                                    <li data-mobile-menu-item><a href="home5.html" class="" data-mobile-menu-trigger>HOME
+                                        5</a></li>
+                                    <li data-mobile-menu-item><a href="home6.html" class="" data-mobile-menu-trigger>HOME
+                                        6</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li data-mobile-menu-item><a href="#" class="" data-mobile-menu-trigger>PRODUCTS<i
+                        class="fal fa-angle-right"></i></a>
+                    <div class="mobile-menu__links-panel" data-mobile-menu-panel>
+                        <div class="mobile-menu__panel mobile-menu__panel--hidden">
+                            <div class="mobile-menu__panel-header">
+                                <button class="mobile-menu__panel-back" type="button">
+                                    <i class="fal fa-angle-left"></i>
+                                </button>
+                                <div class="mobile-menu__panel-title">PRODUCT</div>
+                            </div>
+                            <div class="mobile-menu__panel-body">
+                                <ul class="mobile-menu__links">
+                                    <li data-mobile-menu-item><a href="#" class="" data-mobile-menu-trigger>ARCHIVE<i
+                                            class="fal fa-angle-right"></i></a>
+                                        <div class="mobile-menu__links-panel" data-mobile-menu-panel>
+                                            <div class="mobile-menu__panel mobile-menu__panel--hidden">
+                                                <div class="mobile-menu__panel-header">
+                                                    <button class="mobile-menu__panel-back" type="button">
+                                                        <i class="fal fa-angle-left"></i>
+                                                    </button>
+                                                    <div class="mobile-menu__panel-title">CATEGORY</div>
+                                                </div>
+                                                <div class="mobile-menu__panel-body">
+                                                    <ul class="mobile-menu__links">
+                                                        <li data-mobile-menu-item>
+                                                            <a href="shop-details.html" class=""
+                                                               data-mobile-menu-trigger>Shop Details</a>
+                                                        </li>
+                                                        <li data-mobile-menu-item>
+                                                            <a href="shop-grid.html" class="" data-mobile-menu-trigger>Shop
+                                                                Grid</a>
+                                                        </li>
+                                                        <li data-mobile-menu-item>
+                                                            <a href="shop-grid-full-width.html" class=""
+                                                               data-mobile-menu-trigger>Shop Grid Full Width</a>
+                                                        </li>
+                                                        <li data-mobile-menu-item>
+                                                            <a href="shop-list.html" class="" data-mobile-menu-trigger>Shop
+                                                                List</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li data-mobile-menu-item><a href="#" class="" data-mobile-menu-trigger>PRODUCT
+                                        SINGLE<i class="fal fa-angle-right"></i></a>
+                                        <div class="mobile-menu__links-panel" data-mobile-menu-panel>
+                                            <div class="mobile-menu__panel mobile-menu__panel--hidden">
+                                                <div class="mobile-menu__panel-header">
+                                                    <button class="mobile-menu__panel-back" type="button">
+                                                        <i class="fal fa-angle-left"></i>
+                                                    </button>
+                                                    <div class="mobile-menu__panel-title">PRODUCT SINGLE</div>
+                                                </div>
+                                                <div class="mobile-menu__panel-body">
+                                                    <ul class="mobile-menu__links">
+                                                        <li data-mobile-menu-item>
+                                                            <a href="shop-details-sidebar-left.html" class=""
+                                                               data-mobile-menu-trigger>Shop Details - Left sidebar</a>
+                                                        </li>
+                                                        <li data-mobile-menu-item>
+                                                            <a href="shop-details-sidebar-right.html" class=""
+                                                               data-mobile-menu-trigger>Shop Details - Right sidebar</a>
+                                                        </li>
+                                                        <li data-mobile-menu-item>
+                                                            <a href="shop-grid-sidebar-left.html" class=""
+                                                               data-mobile-menu-trigger>Shop Grid - Left sidebar</a>
+                                                        </li>
+                                                        <li data-mobile-menu-item>
+                                                            <a href="shop-grid-sidebar-right.html" class=""
+                                                               data-mobile-menu-trigger>Shop Grid - Right sidebar</a>
+                                                        </li>
+                                                        <li data-mobile-menu-item>
+                                                            <a href="shop-list-sidebar-left.html" class=""
+                                                               data-mobile-menu-trigger>Shop List - Left sidebar</a>
+                                                        </li>
+                                                        <li data-mobile-menu-item>
+                                                            <a href="shop-list-sidebar-right.html" class=""
+                                                               data-mobile-menu-trigger>Shop List - Right sidebar</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li data-mobile-menu-item><a href="#" class="" data-mobile-menu-trigger>SHOP PAGES<i
+                                            class="fal fa-angle-right"></i></a>
+                                        <div class="mobile-menu__links-panel" data-mobile-menu-panel>
+                                            <div class="mobile-menu__panel mobile-menu__panel--hidden">
+                                                <div class="mobile-menu__panel-header">
+                                                    <button class="mobile-menu__panel-back" type="button">
+                                                        <i class="fal fa-angle-left"></i>
+                                                    </button>
+                                                    <div class="mobile-menu__panel-title">SHOP PAGES</div>
+                                                </div>
+                                                <div class="mobile-menu__panel-body">
+                                                    <ul class="mobile-menu__links">
+                                                        <li data-mobile-menu-item>
+                                                            <a href="cart.html" class=""
+                                                               data-mobile-menu-trigger>Cart</a>
+                                                        </li>
+                                                        <li data-mobile-menu-item>
+                                                            <a href="checkout.html" class="" data-mobile-menu-trigger>Checkout</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li data-mobile-menu-item><a href="blog-classic-right-sidebar.html" class="" data-mobile-menu-trigger>ACCESSORIES</a>
+                    <div class="mobile-menu__links-panel" data-mobile-menu-panel>
+                        <div class="mobile-menu__panel mobile-menu__panel--hidden">
+                            <div class="mobile-menu__panel-header">
+                                <button class="mobile-menu__panel-back" type="button">
+                                    <i class="fal fa-angle-left"></i>
+                                </button>
+                                <div class="mobile-menu__panel-title">ACCESSORIES</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li data-mobile-menu-item><a href="index.html" class="" data-mobile-menu-trigger>MORE +<i
+                        class="fal fa-angle-right"></i></a>
+                    <div class="mobile-menu__links-panel" data-mobile-menu-panel>
+                        <div class="mobile-menu__panel mobile-menu__panel--hidden">
+                            <div class="mobile-menu__panel-header">
+                                <button class="mobile-menu__panel-back" type="button">
+                                    <i class="fal fa-angle-left"></i>
+                                </button>
+                                <div class="mobile-menu__panel-title">MORE +</div>
+                            </div>
+                            <div class="mobile-menu__panel-body">
+                                <ul class="mobile-menu__links">
+                                    <li data-mobile-menu-item>
+                                        <a href="login.html" class="" data-mobile-menu-trigger>LOGIN</a>
+                                    </li>
+                                    <li data-mobile-menu-item>
+                                        <a href="blog.html" class="" data-mobile-menu-trigger>BLOG</a>
+                                    </li>
+                                    <li data-mobile-menu-item>
+                                        <a href="blog-details.html" class="" data-mobile-menu-trigger>BLOG DETAILS</a>
+                                    </li>
+                                    <li data-mobile-menu-item>
+                                        <a href="contact-us.html" class="" data-mobile-menu-trigger>CONTACT US</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

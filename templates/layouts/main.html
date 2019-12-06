@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xian</title>
+
+    <!-- Mobile Specific Metas-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Bootstrap-->
+    {% include 'layouts/header-style.html' %}
+</head>
+
+<body>
+<div id="loading-overlay">
+    <div class="loader"></div>
+</div>
+<div class="bg-bordcuct-2">
+    <!-- header -->
+    {% include 'layouts/header-nav.html' %}
+</div><!-- bg-bordcuct -->
+{#<section class="flat-slider clearfix">#}
+{#    {% include 'layouts/rev-slider.html' %}#}
+{#</section><!-- flat-slider -->#}
+{% block content %} {% endblock content %}
+
+<footer id="footer" class="footer footer-type2 footer-home">
+    {% include 'layouts/footer.html' %}
+</footer><!-- footer -->
+<div class="mobile-menu">
+    {% include 'layouts/mobile-menu.html' %}
+</div><!-- mobile-menu -->
+<!-- footer script -->
+{% include 'layouts/footer-script.html' %}
+
+</body>
+</html>
