@@ -1,0 +1,261 @@
+{% extends 'layouts/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="flat-row-half">
+        <div class="shopping-cart">
+            <div class="container">
+                <form action="#" class="form-cart">
+                    <table class="shop-table">
+                        <thead>
+                        <tr>
+                            <th class="img-product">PRODUCT</th>
+                            <th class="describe-product">DESCRIPTION</th>
+                            <th class="model-product">MODEL</th>
+                            <th class="edit-product">EDIT</th>
+                            <th class="quantite-product">QUANTITE</th>
+                            <th class="price-product">UNIT PRICE</th>
+                            <th class="total-product">TOTAL</th>
+                        </tr>
+                        </thead>
+                        <tbody class="cart-table-body">
+                        <tr class="res-mg">
+                            <td class="cart-table-column img-product" data-title="PRODUCT">
+                                <a href="#">
+                                    <span><img src="{% static 'images/shop/05.png' %}" alt="images"></span>
+                                </a>
+                            </td>
+                            <td class="cart-table-column describe-product" data-title="DESCRIPTION">
+                                <span class="text">There are many varia-</span>
+                                <p>Lorem Ipsum is simply dummy text of the<br> typesetting.</p>
+                            </td>
+                            <td class="cart-table-column model-product res-15" data-title="MODEL">Product-23</td>
+                            <td class="cart-table-column edit-product res-15" data-title="EDIT">
+                                <i class="fas fa-pencil"></i>
+                                <i class="fal fa-trash-alt"></i>
+                            </td>
+                            <td class="cart-table-column quantite-product" data-title="QUANTITE">
+                                <div class="quantity">
+                                    <input type="number" step="1" min="1" max="99" name="quantity" value="1"
+                                           title="qty">
+                                    <div class="themesflat-quantity">
+                                        <a class="minus" href="javascript:void(0);"> -</a>
+                                        <a class="plus" href="javascript:void(0);"> + </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="cart-table-column price-product res-15" data-title="UNIT PRICE">$999.00</td>
+                            <td class="cart-table-column total-product res-15" data-title="TOTAL">$999.00</td>
+                        </tr>
+                        <tr class="res-mg">
+                            <td class="cart-table-column img-product" data-title="PRODUCT">
+                                <a href="#">
+                                    <span><img src="{% static 'images/shop/06.png' %}" alt="images"></span>
+                                </a>
+                            </td>
+                            <td class="cart-table-column describe-product" data-title="DESCRIPTION">
+                                <span class="text">There are many varia-</span>
+                                <p>Lorem Ipsum is simply dummy text of the<br> typesetting.</p>
+                            </td>
+                            <td class="cart-table-column model-product res-15" data-title="MODEL">Product-23</td>
+                            <td class="cart-table-column edit-product res-15" data-title="EDIT">
+                                <i class="fas fa-pencil"></i>
+                                <i class="fal fa-trash-alt"></i>
+                            </td>
+                            <td class="cart-table-column quantite-product" data-title="QUANTITE">
+                                <div class="quantity">
+                                    <input type="number" step="1" min="1" max="99" name="quantity" value="1"
+                                           title="qty">
+                                    <div class="themesflat-quantity">
+                                        <a class="minus" href="javascript:void(0);"> -</a>
+                                        <a class="plus" href="javascript:void(0);"> + </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="cart-table-column price-product res-15" data-title="UNIT PRICE">$999.00</td>
+                            <td class="cart-table-column total-product res-15" data-title="TOTAL">$999.00</td>
+                        </tr>
+                        </tbody>
+                        <tfoot class="cart-table-foot">
+                        <tr>
+                            <td colspan="7" class="flat-button">
+                                <button class="btn-continue hv-bounce-bl">CONTINUE SHOPPING</button>
+                                <button class="btn-update-cart hv-bounce-bl">UPDATE SHOPPING CART</button>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </form>
+                <div class="three-column">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <form class="estimate-shipping">
+                                <div class="title">Estimate Shopping And Tax</div>
+                                <div class="text-info">
+                                    <div class="text">
+                                        <label>Country</label>
+                                        <input type="text" class="country" placeholder="United States">
+                                    </div>
+                                    <div class="text">
+                                        <label>State/Province</label>
+                                        <input type="text" class="state"
+                                               placeholder="Please select region, state or province">
+                                    </div>
+                                    <div class="text">
+                                        <label>Zip/Postal Code</label>
+                                        <input type="text" class="zip">
+                                    </div>
+                                </div>
+                                <div class="flat-button text-right">
+                                    <button class="btn-get-quote hv-bounce-bl">GET QUOTE</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <form class="disconut-code">
+                                <div class="title">Discount Code</div>
+                                <p>Enter your coupon code if you have</p>
+                                <input type="text">
+                                <div class="flat-button text-right">
+                                    <button class="btn-apply hv-bounce-bl">APPLY</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <form class="cart-total">
+                                <div class="cart-total-wrap">
+                                    <p>
+                                        <span>Subtotal</span>
+                                        <span>$999.00</span>
+                                    </p>
+                                    <p>
+                                        <span>Grand Total</span>
+                                        <span>$999.00</span>
+                                    </p>
+                                </div>
+                                <div class="flat-button">
+                                    <button class="btn-proce-checkout hv-bounce-bl">PROCED TO CHECKOUT</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- shopping-cart -->
+        <div class="related-product">
+            <div class="container">
+                <div class="title-section">
+                    <div class="flat-title less text-center">RELATED PRODUCTS</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 col-fl2">
+                        <div class="item-product item-product-grid cl-bl">
+                            <div class="featured-post">
+                                <div class="entry-image">
+                                    <img src="{% static 'images/shop/01.png' %}" alt="images">
+                                    <span class="new">New</span>
+                                </div>
+                            </div>
+                            <div class="content-product">
+                                <div class="btn-add"><i class="fal fa-plus"></i></div>
+                                <div class="info-product">
+                                    <div class="text">
+                                        <p class="gen-fasion">Men fasion</p>
+                                        <p class="item-kind">Dress</p>
+                                    </div>
+                                    <span class="price">$590</span>
+                                </div>
+                                <div class="title">
+                                    <a href="#">Straight Jeans Topshop</a>
+                                </div>
+                                <div class="add-to-cart">
+                                    <a href="#" class="hv-bounce-bk">+ ADD TO CART</a>
+                                    <span class="favorite"><i class="fal fa-heart"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 col-fl2">
+                        <div class="item-product item-product-grid cl-bl">
+                            <div class="featured-post">
+                                <div class="entry-image">
+                                    <img src="{% static 'images/shop/02.png' %}" alt="images">
+                                    <span class="on-sale">Sale</span>
+                                </div>
+                            </div>
+                            <div class="content-product">
+                                <div class="btn-add"><i class="fal fa-plus"></i></div>
+                                <div class="info-product">
+                                    <div class="text">
+                                        <p class="gen-fasion">Men fasion</p>
+                                        <p class="item-kind">Bag</p>
+                                    </div>
+                                    <span class="price">$660</span>
+                                </div>
+                                <div class="title">
+                                    <a href="#">Eddie Bauer Backpack</a>
+                                </div>
+                                <div class="add-to-cart">
+                                    <a href="#" class="hv-bounce-bk">+ ADD TO CART</a>
+                                    <span class="favorite"><i class="fal fa-heart"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 col-fl2">
+                        <div class="item-product item-product-grid cl-bl">
+                            <div class="featured-post">
+                                <div class="entry-image">
+                                    <img src="{% static 'images/shop/03.png' %}" alt="images">
+                                    <span class="on-sale">-10%</span>
+                                </div>
+                            </div>
+                            <div class="content-product">
+                                <div class="btn-add"><i class="fal fa-plus"></i></div>
+                                <div class="info-product">
+                                    <div class="text">
+                                        <p class="gen-fasion">Women fasion</p>
+                                        <p class="item-kind">Dress</p>
+                                    </div>
+                                    <span class="price">$250</span>
+                                </div>
+                                <div class="title">
+                                    <a href="#">Long Sleeve Stripe</a>
+                                </div>
+                                <div class="add-to-cart">
+                                    <a href="#" class="hv-bounce-bk">+ ADD TO CART</a>
+                                    <span class="favorite"><i class="fal fa-heart"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 col-fl2">
+                        <div class="item-product item-product-grid cl-bl">
+                            <div class="featured-post">
+                                <div class="entry-image">
+                                    <img src="{% static 'images/shop/04.png' %}" alt="images">
+                                </div>
+                            </div>
+                            <div class="content-product">
+                                <div class="btn-add"><i class="fal fa-plus"></i></div>
+                                <div class="info-product">
+                                    <div class="text">
+                                        <p class="gen-fasion">Men fasion</p>
+                                        <p class="item-kind">Watch</p>
+                                    </div>
+                                    <span class="price">$460</span>
+                                </div>
+                                <div class="title">
+                                    <a href="#">Auto Hamilton Watch</a>
+                                </div>
+                                <div class="add-to-cart">
+                                    <a href="#" class="hv-bounce-bk">+ ADD TO CART</a>
+                                    <span class="favorite"><i class="fal fa-heart"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
