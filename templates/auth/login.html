@@ -3,11 +3,13 @@
 {% block content %}
     <div class="flat-row">
         <div class="container">
+            {% include 'layouts/alert-message.html' %}
             <div class="d-md-flex justify-content-center">
                 <div class="login">
-                    <form action="#" class="border-lg">
-                        <input type="text" class="email" placeholder="Enter your email....">
-                        <input type="text" class="password" placeholder="Enter your Password....">
+                    <form action="#" class="border-lg" method="POST">
+                        {% csrf_token %}
+                        <input type="email" class="email" name="email" placeholder="Enter your email....">
+                        <input type="password" class="password" placeholder="Enter your Password....">
                         <div class="flat-button">
                             <button class="btn-login hv-bounce-bl">LOGIN</button>
                         </div>
@@ -32,9 +34,10 @@
                     </form>
                 </div>
                 <div class="register">
-                    <form action="#" class="border-lg">
-                        <input type="text" class="name" placeholder="Full name...">
-                        <input type="text" class="email" placeholder="Enter your email....">
+                    <form action="#" class="border-lg" method="POST">
+                        {% csrf_token %}
+                        <input type="email" class="name" name="email" placeholder="Email">
+                        <input type="password" class="email" name="password" placeholder="Enter your email....">
                         <input type="text" class="password" placeholder="Enter your Password....">
                         <input type="text" class="phone" placeholder="(+99) 00000000000">
                         <div class="flat-button">
