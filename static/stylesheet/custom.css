@@ -1,0 +1,25 @@
+.parsley-required {
+    float: left;
+    margin-top: -17px;
+    color: #ff4b5a;
+    font-size: 13px;
+}
+
+.parsley-type {
+    float: left;
+    margin-top: -17px;
+    color: #ff4b5a;
+    font-size: 13px;
+}
+.parsley-minlength {
+    float: left;
+    margin-top: -17px;
+    color: #ff4b5a;
+    font-size: 13px;
+}
+.parsley-range {
+    float: left;
+    margin-top: -17px;
+    color: #ff4b5a;
+    font-size: 13px;
+}

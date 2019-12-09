@@ -34,12 +34,16 @@
                     </form>
                 </div>
                 <div class="register">
-                    <form action="#" class="border-lg" method="POST">
+                    <form action="{% url 'user:registration' %}" class="border-lg" method="POST">
                         {% csrf_token %}
-                        <input type="email" class="name" name="email" placeholder="Email">
-                        <input type="password" class="email" name="password" placeholder="Enter your email....">
-                        <input type="text" class="password" placeholder="Enter your Password....">
-                        <input type="text" class="phone" placeholder="(+99) 00000000000">
+                        <input type="email" class="email" name="email" placeholder="Email" required
+                               data-parsley-type="email">
+                        <input type="text" class="name" name="username" placeholder="Username" required>
+                        <input type="text" class="name" name="first_name" placeholder="First name" required>
+                        <input type="text" class="name" name="last_name" placeholder="Last name" required>
+                        <input type="text" class="password" name="password" placeholder="Password...."
+                               required data-parsley-minlength="6">
+                        <input type="text" class="phone" name="phone" placeholder="Phone" required>
                         <div class="flat-button">
                             <button class="btn-register hv-bounce-bl">REGISTER</button>
                         </div>
@@ -66,4 +70,11 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $('.border-lg').parsley();
+        });
+    </script>
 {% endblock %}
