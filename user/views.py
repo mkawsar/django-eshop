@@ -1,6 +1,9 @@
-from django.contrib import messages
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+from .forms import UserRegistrationForm
+from .models import Roles, Users
 
 # Create your views here.
 from django.urls import reverse
@@ -27,9 +30,20 @@ def registration(request):
             last_name = request.POST.get('last_name')
             password = request.POST.get('password')
             phone = request.POST.get('phone')
-            print(email)
-            messages.success(request, 'Test')
-            return HttpResponseRedirect(reverse('user:login'))
+            forms = UserRegistrationForm(request.POST)
+            if forms.is_valid():
+                user = User.objects.create_user(first_name=first_name, last_name=last_name, email=email,
+                                                username=username, password=password)
+                user.save()
+                details = Users(user_id=user.id, phone=phone)
+                details.save()
+                roles = Roles(user_id=user.id, is_admin=False)
+                roles.save()
+                messages.success(request, 'Your registration is successfully!')
+                return HttpResponseRedirect(reverse('user:login'))
+            else:
+                messages.error(request, forms.errors)
+                return HttpResponseRedirect(reverse('user:login'))
         except Exception as e:
             messages.error(request, 'Failed to user registration')
             return HttpResponseRedirect(reverse('user:login'))

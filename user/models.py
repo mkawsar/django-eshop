@@ -6,6 +6,18 @@ from django.contrib.auth.models import User
 class Users(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     phone = models.CharField(max_length=255, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'user_details'
+        db_table = 'users_details'
+
+
+class Roles(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    is_admin = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'roles'
