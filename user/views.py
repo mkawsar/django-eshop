@@ -20,5 +20,16 @@ def login(request):
 
 def registration(request):
     if request.method == 'POST':
-        print('test')
-        return HttpResponseRedirect(reverse('user:login'))
+        try:
+            email = request.POST.get('email')
+            username = request.POST.get('username')
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            password = request.POST.get('password')
+            phone = request.POST.get('phone')
+            print(email)
+            messages.success(request, 'Test')
+            return HttpResponseRedirect(reverse('user:login'))
+        except Exception as e:
+            messages.error(request, 'Failed to user registration')
+            return HttpResponseRedirect(reverse('user:login'))

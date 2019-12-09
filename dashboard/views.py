@@ -8,6 +8,7 @@ from django.urls import reverse
 def dashboard(request):
     return render(request, 'dashboard/index.html')
 
+
 def checkout(request):
     return render(request, 'global/checkout.html')
 
