@@ -1,23 +1,26 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from .forms import UserRegistrationForm
 from .models import Roles, Users
+from .forms import UserRegistrationForm
 
 # Create your views here.
 from django.urls import reverse
 
 
-def login(request):
+def loginView(request):
     if request.method == 'POST':
-        email = request.POST.get('email', None)
-        password = request.POST.get('password', None)
         try:
-            pass
-        except:
-            messages.warning(request, 'Wrong Email')
-            return HttpResponseRedirect(reverse('user:login'))
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return HttpResponseRedirect(reverse('account:login'))
+        except Exception as e:
+            messages.warning(request, e)
+            return HttpResponseRedirect(reverse('account:login'))
     return render(request, 'auth/login.html')
 
 
@@ -40,10 +43,10 @@ def registration(request):
                 roles = Roles(user_id=user.id, is_admin=False)
                 roles.save()
                 messages.success(request, 'Your registration is successfully!')
-                return HttpResponseRedirect(reverse('user:login'))
+                return HttpResponseRedirect(reverse('account:login'))
             else:
                 messages.error(request, forms.errors)
-                return HttpResponseRedirect(reverse('user:login'))
+                return HttpResponseRedirect(reverse('account:login'))
         except Exception as e:
-            messages.error(request, 'Failed to user registration')
-            return HttpResponseRedirect(reverse('user:login'))
+            messages.error(request, 'Failed to user registration!')
+            return HttpResponseRedirect(reverse('account:login'))

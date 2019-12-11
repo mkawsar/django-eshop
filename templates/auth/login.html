@@ -8,8 +8,8 @@
                 <div class="login">
                     <form action="#" class="border-lg login-form" method="POST">
                         {% csrf_token %}
-                        <input type="email" class="email" name="email" placeholder="Enter your email...." required>
-                        <input type="password" class="password" placeholder="Enter your Password...." required
+                        <input type="text" class="email" name="username" placeholder="Email/Username" required>
+                        <input type="password" class="password" placeholder="Password" required
                                data-parsley-minlength="6">
                         <div class="flat-button">
                             <button class="btn-login hv-bounce-bl">LOGIN</button>
@@ -35,7 +35,7 @@
                     </form>
                 </div>
                 <div class="register">
-                    <form action="{% url 'user:registration' %}" class="border-lg" method="POST">
+                    <form action="{% url 'account:registration' %}" class="border-lg" method="POST">
                         {% csrf_token %}
                         <input type="email" class="email" name="email" placeholder="Email" required
                                data-parsley-type="email">
