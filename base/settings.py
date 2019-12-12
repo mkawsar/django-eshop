@@ -131,3 +131,5 @@ STATICFILES_DIRS = (
 AUTHENTICATION_BACKENDS = [
     'account.backends.EmailOrUsernameBackend'
 ]
+
+LOGOUT_REDIRECT_URL = '/user/login'

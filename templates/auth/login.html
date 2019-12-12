@@ -1,7 +1,7 @@
 {% extends 'layouts/main.html' %}
 {% load static %}
 {% block content %}
-    <div class="flat-row">
+    <div class="flat-row"></div>
         <div class="container">
             {% include 'layouts/alert-message.html' %}
             <div class="d-md-flex justify-content-center">
@@ -9,7 +9,7 @@
                     <form action="#" class="border-lg login-form" method="POST">
                         {% csrf_token %}
                         <input type="text" class="email" name="username" placeholder="Email/Username" required>
-                        <input type="password" class="password" placeholder="Password" required
+                        <input type="password" class="password" placeholder="Password" name="password" required
                                data-parsley-minlength="6">
                         <div class="flat-button">
                             <button class="btn-login hv-bounce-bl">LOGIN</button>

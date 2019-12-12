@@ -1,5 +1,6 @@
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -15,9 +16,13 @@ def loginView(request):
         try:
             username = request.POST.get('username')
             password = request.POST.get('password')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return HttpResponseRedirect(reverse('account:login'))
+            user_logged_in = authenticate(username=username, password=password)
+            if user_logged_in is not None:
+                login(request, user_logged_in)
+                return HttpResponseRedirect(reverse('dashboard:index'))
+            else:
+                messages.error(request, 'Invalid Credentials')
+                return HttpResponseRedirect(reverse('account:login'))
         except Exception as e:
             messages.warning(request, e)
             return HttpResponseRedirect(reverse('account:login'))
@@ -50,3 +55,10 @@ def registration(request):
         except Exception as e:
             messages.error(request, 'Failed to user registration!')
             return HttpResponseRedirect(reverse('account:login'))
+
+
+@login_required()
+def user_logout(request):
+    logout(request)
+    messages.success(request, 'Logout successfully!')
+    return HttpResponseRedirect(reverse('account:login'))
