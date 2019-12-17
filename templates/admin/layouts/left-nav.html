@@ -2,19 +2,22 @@
 
 <div class="sidebar" data-background-color="brown" data-active-color="danger">
     <div class="logo">
-        <a href="/" class="simple-text logo-mini">CU</a>
-
-        <a href="/" class="simple-text logo-normal">Community</a>
+        <a href="/" class="simple-text logo-mini">
+            <img src="{% static 'admin/img/favicon-32x32.png' %}" alt="eShop">
+        </a>
+        <a href="/" class="simple-text logo-normal">
+            <img src="{% static 'admin/img/favicon-32x32.png' %}" alt="eShop"> eShop
+        </a>
     </div>
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="info">
-                {% comment %}<div class="photo">
-                    <img src="{{ request.user.profile.image.url }}" />
-                </div>{% endcomment %}
+                <div class="photo">
+                    <img src="https://ui-avatars.com/api/?name={{ request.user.first_name }}&w=196&h=196" />
+                </div>
 
                 <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-                    <span>Kawsar <b class="caret"></b></span>
+                    <span>{{ request.user.first_name }} <b class="caret"></b></span>
                 </a>
                 <div class="clearfix"></div>
 
@@ -27,7 +30,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{% url 'account:logout' %}">
                                 <div style="color: #ff4a5b">
                                     <span class="sidebar-mini">L</span>
                                     <span class="sidebar-normal">Logout</span>

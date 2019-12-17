@@ -1,11 +1,7 @@
-from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 
-def adminLoginView(request):
-    if request.method == 'POST':
-        return HttpResponse(request.POST.get('username'))
-    return render(request, 'admin/auth/login.html')
-
-
+@login_required
 def adminDashboardView(request):
     return render(request, 'admin/dashboard/index.html')

@@ -19,6 +19,8 @@ def loginView(request):
             user_logged_in = authenticate(username=username, password=password)
             if user_logged_in is not None:
                 login(request, user_logged_in)
+                if request.user.roles.is_admin:
+                    return HttpResponseRedirect(reverse('admin-account:dashboard'))
                 return HttpResponseRedirect(reverse('dashboard:index'))
             else:
                 messages.error(request, 'Invalid Credentials')

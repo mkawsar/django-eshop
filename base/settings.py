@@ -132,4 +132,6 @@ AUTHENTICATION_BACKENDS = [
     'account.backends.EmailOrUsernameBackend'
 ]
 
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/user/login'
 LOGOUT_REDIRECT_URL = '/user/login'
