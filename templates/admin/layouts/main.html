@@ -2,31 +2,27 @@
 <!doctype html>
 <html lang="en">
     <head>
-        {% if title %}
-            <title>Community | {{ title }}</title>
-        {% else %}
-            <title>Community</title>
-        {% endif %}
-        {% include 'layouts/header-style.html' %}
+        <title>eShop</title>
+        {% include 'admin/layouts/header-style.html' %}
         {% block style %}{% endblock style %}
     </head>
 
     <body>
         <div class="wrapper">
-            {% include 'layouts/left-nav.html' %}
+            {% include 'admin/layouts/left-nav.html' %}
 
             <div class="main-panel">
-                {% include 'layouts/top-menu.html' %}
+                {% include 'admin/layouts/top-menu.html' %}
 
                 <div class="content">
                     {% block content %} {% endblock content %}
                 </div>
-                {% include 'layouts/footer.html' %}
+                {% include 'admin/layouts/footer.html' %}
             </div>
         </div>
     </body>
 
 <!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->
-{% include 'layouts/footer-script.html' %}
+{% include 'admin/layouts/footer-script.html' %}
 {% block script %}{% endblock script %}
 </html>

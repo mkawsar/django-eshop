@@ -11,11 +11,7 @@
                 <span class="icon-bar bar3"></span>
             </button>
             <a class="navbar-brand" href="javascript:void(0)">
-                {% if title %}
-                    {{ title }}
-                {% else %}
-                    Community
-                {% endif %}
+                Overview
             </a>
         </div>
         <div class="collapse navbar-collapse">
@@ -32,8 +28,8 @@
                         <p class="hidden-md hidden-lg">Notifications<b class="caret"></b></p>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{% url 'blog-create' %}">Create Blog</a></li>
-                        <li><a href="{% url 'group-create' %}">Create Group</a></li>
+                        <li><a href="#">Create Blog</a></li>
+                        <li><a href="#">Create Group</a></li>
                     </ul>
                 </li>
             </ul>
