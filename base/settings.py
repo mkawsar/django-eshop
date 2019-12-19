@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'dashboard.apps.DashboardConfig',
     'account.apps.AccountConfig',
-    'product.apps.ProductConfig'
+    'product.apps.ProductConfig',
+    'category.apps.CategoryConfig'
 ]
 
 MIDDLEWARE = [
