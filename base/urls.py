@@ -7,5 +7,6 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', include('dashboard.urls', namespace='dashboard')),
     path('user/', include('account.urls', namespace='account')),
-    path('admin/', include('account.admin_urls', namespace='admin-account'))
+    path('admin/', include('dashboard.admin_urls', namespace='admin-dashboard')),
+    path('admin/product/', include('product.admin_urls', namespace='admin-product'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
