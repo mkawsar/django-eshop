@@ -1,28 +1,50 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>eShop</title>
-        {% include 'admin/layouts/header-style.html' %}
-        {% block style %}{% endblock style %}
-    </head>
+<head>
+    <title>eShop</title>
+    {% include 'admin/layouts/header-style.html' %}
+    {% block style %}{% endblock style %}
+</head>
 
-    <body>
-        <div class="wrapper">
-            {% include 'admin/layouts/left-nav.html' %}
+<body>
+<div class="wrapper">
+    {% include 'admin/layouts/left-nav.html' %}
 
-            <div class="main-panel">
-                {% include 'admin/layouts/top-menu.html' %}
+    <div class="main-panel">
+        {% include 'admin/layouts/top-menu.html' %}
 
-                <div class="content">
-                    {% block content %} {% endblock content %}
-                </div>
-                {% include 'admin/layouts/footer.html' %}
-            </div>
+        <div class="content">
+            {% block content %} {% endblock content %}
         </div>
-    </body>
+        {% include 'admin/layouts/footer.html' %}
+    </div>
+</div>
+</body>
 
 <!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->
 {% include 'admin/layouts/footer-script.html' %}
 {% block script %}{% endblock script %}
+<script>
+    $(document).ready(function () {
+        $(".add-category-btn").click(function (e) {
+            $("#add-category-modal").modal('show');
+            var pageUrl = '{% url 'admin-category:create-category' %}';
+            $.ajax({
+                type: "GET",
+                url: pageUrl,
+                beforeSend: function () {
+                    $("#add-category").html('<div class="overlay loader-div"><i class="fa fa-refresh fa-spin"></i></div>');
+                },
+                success: function (data) {
+                    $("#add-category").html(data);
+                },
+                error: function () {
+                    $("#add-category").html("Failed to load data.");
+                }
+            });
+            e.preventDefault();
+        });
+    })
+</script>
 </html>

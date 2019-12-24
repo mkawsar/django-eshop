@@ -1,13 +1,20 @@
+import json
 from django.views import generic
+from django.http import HttpResponse
+from .models import Category, SubCategory
+from django.template.defaultfilters import slugify
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class AdminCategoryListView(LoginRequiredMixin, generic.TemplateView):
+class AdminCategoryListView(LoginRequiredMixin, generic.ListView):
     template_name = 'admin/category/index.html'
+    model = Category
+    context_object_name = 'categories'
 
     def get_context_data(self, **kwargs):
-        context = super(AdminCategoryListView, self).get_context_data(**kwargs)
-        context['title'] = 'Categories'
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Category List'
+        # context['categories'] = Category.objects.all()
         return context
 
 
@@ -20,4 +27,12 @@ class AdminCreateCategoryView(LoginRequiredMixin, generic.TemplateView):
         return context
 
     def post(self, request):
-        pass
+        try:
+            category = Category(created_by_id=request.user.id, name=request.POST.get('name'),
+                                category_slug=slugify(request.POST.get('name')))
+            category.save()
+            return HttpResponse(json.dumps({'status': True, 'message': 'Product category added successfully!'}),
+                                content_type="application/json")
+        except Exception as e:
+            return HttpResponse(json.dumps({'status': False, 'message': 'Failed to add product category'}),
+                                content_type="application/json")

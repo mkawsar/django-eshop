@@ -33,10 +33,27 @@
                         <p class="hidden-md hidden-lg">Notifications<b class="caret"></b></p>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{% url 'admin-category:create-category' %}">Create Category</a></li>
+                        <li><a href="#" class="add-category-btn">Create Category</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<div class="modal fade" id="add-category-modal" tabindex="-1" role="dialog" aria-labelledby="postLikerLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Product Category</h4>
+            </div>
+            <div class="modal-body modal-body-invite">
+                <div id="add-category"></div>
+            </div>
+            <div class="modal-footer" style="border-top: 0px;">
+            </div>
+        </div>
+    </div>
+</div>

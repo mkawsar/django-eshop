@@ -4,11 +4,30 @@
         {% include 'admin/layouts/alert-message.html' %}
         <div class="row">
             <div class="col-md-12">
-                <div class="block-content-full" style="overflow: auto;">
-                    <div class="card-header">
-                        <h4>Categories</h4>
+                <div class="card">
+                    <div class="card-content table-responsive table-full-width">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Category Name</th>
+                                <th>Creator</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{ categoires|length }}
+                            {% for category in categories %}
+                                <tr>
+                                    <td>1</td>
+                                    <td>{{ category.name }}</td>
+                                    <td>{{ category.created_by.first_name|title }}</td>
+                                    <td>Action</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
-                    <hr>
                 </div>
             </div>
         </div>
