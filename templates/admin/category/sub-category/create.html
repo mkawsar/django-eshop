@@ -41,7 +41,7 @@
             var f = $(this);
             if (f.parsley().isValid()) {
                 $.ajax({
-                    url: '{% url 'admin-category:create-category' %}',
+                    url: '/admin/category/sub/category/create',
                     type: 'POST',
                     data: $(this).serialize(),
                     beforeSend: function () {

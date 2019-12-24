@@ -17,6 +17,15 @@
                             </tr>
                             </thead>
                             <tbody>
+                                {% for category in categories %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ category.sub_category_name }}</td>
+                                        <td>{{ category.category.name }}</td>
+                                        <td>{{ category.created_by.first_name }}</td>
+                                        <td>Action</td>
+                                    </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>

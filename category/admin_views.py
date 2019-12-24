@@ -41,8 +41,10 @@ class AdminCreateCategoryView(LoginRequiredMixin, generic.TemplateView):
                                 content_type="application/json")
 
 
-class AdminSubCategoryListView(LoginRequiredMixin, generic.TemplateView):
+class AdminSubCategoryListView(LoginRequiredMixin, generic.ListView):
     template_name = 'admin/category/sub-category/list.html'
+    model = SubCategory
+    context_object_name = 'categories'
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -57,3 +59,15 @@ class AdminSubCategoryCreateView(LoginRequiredMixin, generic.TemplateView):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all().order_by('name')
         return context
+
+    def post(self, request):
+        try:
+            category = SubCategory(created_by_id=request.user.id, category_id=request.POST.get('category_id'),
+                                       sub_category_name=request.POST.get('name'),
+                                       sub_category_slug=slugify(request.POST.get('name')))
+            category.save()
+            return HttpResponse(json.dumps({'status': True, 'message': 'Product sub category added successfully!'}),
+                                content_type="application/json")
+        except Exception as e:
+            return HttpResponse(json.dumps({'status': False, 'message': 'Failed to add product sub category'}),
+                                content_type="application/json")

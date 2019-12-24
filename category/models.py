@@ -34,4 +34,4 @@ class SubCategory(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.sub_category_slug = slugify(self.sub_category_name)
-        super(SubCategory).save(*args, **kwargs)
+        super(SubCategory, self).save(*args, **kwargs)
