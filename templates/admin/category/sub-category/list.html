@@ -10,20 +10,13 @@
                             <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Sub Category Name</th>
                                 <th>Category Name</th>
                                 <th>Creator</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {% for category in categories %}
-                                <tr>
-                                    <td>{{ forloop.counter }}</td>
-                                    <td>{{ category.name }}</td>
-                                    <td>{{ category.created_by.first_name|title }}</td>
-                                    <td>Action</td>
-                                </tr>
-                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

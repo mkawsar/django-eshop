@@ -5,7 +5,7 @@ from django.template.defaultfilters import slugify
 
 # Create your models here.
 class Category(models.Model):
-    created_by = models.OneToOneField(User, on_delete=models.DO_NOTHING)
+    created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=255, blank=True, null=True)
     category_slug = models.SlugField(blank=True, null=True, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -21,8 +21,8 @@ class Category(models.Model):
 
 
 class SubCategory(models.Model):
-    created_by = models.OneToOneField(User, on_delete=models.DO_NOTHING)
-    category = models.OneToOneField(Category, on_delete=models.DO_NOTHING)
+    created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
     sub_category_name = models.CharField(max_length=255, blank=True, null=True)
     sub_category_slug = models.SlugField(blank=True, null=True, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
