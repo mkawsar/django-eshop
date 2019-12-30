@@ -1,6 +1,7 @@
 {% load static %}
 {% url 'admin-dashboard:index' as admin_dashboard_url %}
 {% url 'admin-product:index' as admin_product_index_url %}
+{% url 'admin-product:create' as admin_product_create_url %}
 {% url 'admin-category:index' as admin_category_index_url %}
 {% url 'admin-category:create-category' as admin_category_create_url %}
 {% url 'admin-category:sub-category-list' as admin_sub_category_list_url %}
@@ -52,15 +53,15 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li {% if request.get_full_path == admin_product_index_url %}class="active" {% endif %}>
+            <li {% if request.get_full_path == admin_product_index_url or request.get_full_path == admin_product_create_url %}class="active" {% endif %}>
                 <a data-toggle="collapse" href="#productOverview" aria-expanded="false">
                     <i class="fa fa-product-hunt" aria-hidden="true"></i>
                     <p>Product <b class="caret"></b></p>
                 </a>
-                <div class="collapse {% if request.get_full_path == admin_product_index_url %}in {% endif %}"
+                <div class="collapse {% if request.get_full_path == admin_product_index_url or request.get_full_path == admin_product_create_url %}in {% endif %}"
                      id="productOverview">
                     <ul class="nav">
-                        <li {% if request.get_full_path == admin_product_index_url %}class="active" {% endif %}>
+                        <li {% if request.get_full_path == admin_product_index_ur %}class="active" {% endif %}>
                             <a href="{% url 'admin-product:index' %}">
                                 <span class="sidebar-mini">L</span>
                                 <span class="sidebar-normal">List</span>

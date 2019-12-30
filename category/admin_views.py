@@ -24,8 +24,7 @@ class AdminCreateCategoryView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'admin/category/create-category.html'
 
     def get_context_data(self, **kwargs):
-        context = super(AdminCreateCategoryView,
-                        self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = 'Category Create'
         return context
 

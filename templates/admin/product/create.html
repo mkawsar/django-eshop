@@ -1,0 +1,74 @@
+{% extends 'admin/layouts/main.html' %}
+{% block content %}
+<div class="container-fluid">
+    {% include 'admin/layouts/alert-message.html' %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-content">
+                    <form class="form-horizontal" action="#" method="post" id="product-add-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="" class="control-label col-sm-2">Product Name <span class="required-field">*</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="name" class="form-control" placeholder="Product Name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label col-sm-2">Category <span class="required-field">*</span></label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="category_id" data-parsley-required="true">
+                                    <option value="">Select an option</option>
+                                    {% for category in categories %}
+                                        <option value="{{ category.id }}">{{ category.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="control-label col-sm-2">Sub Category <span class="required-field">*</span></label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="sub_category_id" data-parsley-required="true">
+                                    <option value="">Select an option</option>
+                                    {% for category in sub_categories %}
+                                        <option value="{{ category.id }}">{{ category.sub_category_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label col-sm-2">Details <span class="required-field">*</span></label>
+                            <div class="col-sm-10">
+                                <textarea name="product_details" class="form-control" id="product-details" placeholder="Product Details" required></textarea>
+                                <!-- <input type="text" name="name" class="form-control" placeholder="Product Name" required> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2">
+                                <button type="submit" class="btn btn-success btn-outfil">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+    {% load static %}
+    <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#product-add-form').parsley();
+            CKEDITOR.editorConfig = function (config) {
+                config.language = 'es';
+                config.uiColor = '#F7B42C';
+                config.height = 300;
+                config.toolbarCanCollapse = true;
+            };
+            CKEDITOR.replace('product-details');
+        });
+    </script>
+{% endblock %}

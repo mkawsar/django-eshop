@@ -3,7 +3,11 @@
 <html lang="en">
 
 <head>
-	<title>eShop</title>
+	{% if title %}
+        <title>eShop | {{ title }}</title>
+    {% else %}
+        <title>eShop</title>
+    {% endif %}
 	{% include 'admin/layouts/header-style.html' %}
 	{% block style %}{% endblock style %}
 </head>
