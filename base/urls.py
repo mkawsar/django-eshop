@@ -10,4 +10,4 @@ urlpatterns = [
     path('admin/', include('dashboard.admin_urls', namespace='admin-dashboard')),
     path('admin/product/', include('product.admin_urls', namespace='admin-product')),
     path('admin/category/', include('category.admin_urls', namespace='admin-category')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

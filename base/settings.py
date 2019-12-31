@@ -137,3 +137,8 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/user/login'
 LOGOUT_REDIRECT_URL = '/user/login'
+
+
+# Media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
