@@ -1,0 +1,135 @@
+{% extends 'admin/layouts/main.html' %}
+{% block style %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css"/>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        {% include 'admin/layouts/alert-message.html' %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content">
+                        <form class="form-horizontal" action="#" method="post"
+                              id="product-update-form" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="" class="control-label col-sm-2">Product Name <span
+                                        class="required-field">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="name" class="form-control" placeholder="Product Name"
+                                           required value="{{ product.product_name }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="control-label col-sm-2">Category <span
+                                        class="required-field">*</span></label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="category_id" data-parsley-required="true">
+                                        <option value="">Select an option</option>
+                                        {% for category in categories %}
+                                            <option value="{{ category.id }}"
+                                                    {% if product.category_id ==  category.id %}
+                                                    selected {% endif %}>{{ category.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="control-label col-sm-2">Sub Category <span
+                                        class="required-field">*</span></label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="sub_category_id" data-parsley-required="true">
+                                        <option value="">Select an option</option>
+                                        {% for category in sub_categories %}
+                                            <option value="{{ category.id }}"
+                                                    {% if product.sub_category_id ==  category.id %}
+                                                    selected {% endif %}>{{ category.sub_category_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="control-label col-sm-2">Details <span
+                                        class="required-field">*</span></label>
+                                <div class="col-sm-10">
+                                    <textarea name="product_details" class="form-control" id="product-details"
+                                              placeholder="Product Details"
+                                              required>{{ product.product_description }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="control-label col-sm-2">Image <span class="required-field">*</span></label>
+                                <div class="col-sm-10">
+                                    <a href="#" class="btn btn-sm btn-info" id="product-image-btn"
+                                       data-product-id="{{ product.id }}">Add Image</a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2">
+                                    <button type="submit" class="btn btn-success btn-outfile">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="add-product-image-modal" tabindex="-1" role="dialog"
+             aria-labelledby="postLikerLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Upload Product Image</h4>
+                    </div>
+                    <div class="modal-body modal-body-invite">
+                        <div id="add-image"></div>
+                    </div>
+                    <div class="modal-footer" style="border-top: 0px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block script %}
+    {% load static %}
+    <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
+    <script>
+        CKEDITOR.editorConfig = function (config) {
+            config.language = 'es';
+            config.uiColor = '#F7B42C';
+            config.height = 300;
+            config.toolbarCanCollapse = true;
+        };
+        CKEDITOR.replace('product-details');
+        $(document).ready(function () {
+            $('#product-update-form').parsley();
+            $('#product-image-btn').click(function (e) {
+                e.preventDefault();
+                const productID = $(this).attr('data-product-id');
+                var pageUrl = '/admin/product/details/image/upload/' + productID + '/';
+                $("#add-product-image-modal").modal('show');
+                $.ajax({
+                    type: "GET",
+                    url: pageUrl,
+                    beforeSend: function () {
+                        $("#add-image").html('<div class="overlay loader-div"><i class="fa fa-refresh fa-spin"></i></div>');
+                    },
+                    success: function (data) {
+                        $("#add-image").html(data);
+                    },
+                    error: function () {
+                        $("#add-image").html("Failed to load data.");
+                    }
+                });
+            })
+        });
+    </script>
+{% endblock %}

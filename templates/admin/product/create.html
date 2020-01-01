@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-content">
-                    <form class="form-horizontal" action="{% url 'admin-product:create' %}" method="post" id="product-add-form">
+                    <form class="form-horizontal" action="{% url 'admin-product:create' %}" method="post" id="product-add-form" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="" class="control-label col-sm-2">Product Name <span class="required-field">*</span></label>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2">
-                                <button type="submit" class="btn btn-success btn-outfil">Submit</button>
+                                <button type="submit" class="btn btn-success btn-outfile">Submit</button>
                             </div>
                         </div>
                     </form>
