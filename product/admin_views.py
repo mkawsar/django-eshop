@@ -1,6 +1,12 @@
-from .models import Product
+import os
+import json
+import uuid
+from django.conf import settings
+
+from .models import Product, ProductImages
 from django.views import generic
 from django.contrib import messages
+from django.template.defaultfilters import slugify
 from django.shortcuts import redirect, HttpResponse
 from category.models import Category, SubCategory
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -60,3 +66,19 @@ class ProductImage(LoginRequiredMixin, generic.TemplateView):
         context = super(ProductImage, self).get_context_data(**kwargs)
         context['productID'] = kwargs.get('pk')
         return context
+
+    def post(self, request, *args, **kwargs):
+        product = Product.objects.get(pk=kwargs.get('pk'))
+        files = request.FILES.getlist('file')
+        product_name = slugify(product.product_name)
+        for file in files:
+            extension = os.path.splitext(str(file))[1]
+            filename = "%s_%s%s" % (product_name, uuid.uuid4().hex[:6].lower(), extension)
+            with open(settings.MEDIA_ROOT + "/images/product/" + filename, 'wb+') as destination:
+                image = ProductImages(product_id=kwargs.get('pk'), image=filename)
+                image.save()
+                for chunk in file.chunks():
+                    destination.write(chunk)
+                    return HttpResponse(
+                        json.dumps({'status': True, 'message': 'Product images uploaded successfully!'}),
+                        content_type="application/json")
