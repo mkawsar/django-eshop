@@ -1,0 +1,42 @@
+<div class="alert alert-success" role="alert" id="product-image-add-success" style="display: none;"></div>
+<div class="alert alert-danger" role="alert" id="product-image-add-failed" style="display: none;"></div>
+
+<div id="dropzone" style="margin-bottom: 20px;">
+    <form action="" method="post" class="dropzone dz-clickable" id="contentUpload" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="dz-message">Drop files here or click to upload.
+            <br> <span class="note"></span>
+        </div>
+        <input type="hidden" id="mediaTag" name="images[]" value="">
+    </form>
+    <span class="help-block error-msg" id="file-exists-error"></span>
+    <p></p>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#contentUpload").dropzone({
+            paramName: 'file',
+            url: '/admin/product/details/image/upload/' + {{ productID }} +'/',
+            clickable: true,
+            enqueueForUpload: false,
+            uploadMultiple: false,
+            addRemoveLinks: true,
+            maxFiles: 3,
+            maxfilesexceeded: function (file) {
+                this.removeAllFiles();
+                this.addFile(file);
+            },
+            success: function (file, response) {
+                if (response.status === true) {
+                    $("#product-image-add-success").html(response.message);
+                    $("#product-image-add-success").show();
+
+                } else {
+                    $("#product-image-add-failed").html(response.message);
+                }
+
+            }
+        });
+    })
+</script>
