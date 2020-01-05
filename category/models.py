@@ -35,3 +35,15 @@ class SubCategory(models.Model):
         if not self.id:
             self.sub_category_slug = slugify(self.sub_category_name)
         super(SubCategory, self).save(*args, **kwargs)
+
+
+class SubSubCategory(models.Model):
+    created = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
+    sub_category = models.ForeignKey(SubCategory, on_delete=models.DO_NOTHING)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'sub_sub_category'
