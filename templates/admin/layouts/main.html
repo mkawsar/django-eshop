@@ -72,6 +72,26 @@
 			});
 			e.preventDefault();
 		});
+
+		$(".add-ss-category-btn").click(function (e)
+		{
+			$("#add-ss-category-modal").modal('show');
+			var pageUrl = '/admin/category/ss/category/create';
+			$.ajax({
+				type: "GET",
+				url: pageUrl,
+				beforeSend: function () {
+					$("#add-ss-category").html('<div class="overlay loader-div"><i class="fa fa-refresh fa-spin"></i></div>');
+				},
+				success: function (data) {
+					$("#add-ss-category").html(data);
+				},
+				error: function () {
+					$("#add-ss-category").html("Failed to load data.");
+				}
+			});
+			e.preventDefault();
+		});
 	});
 </script>
 

@@ -1,0 +1,89 @@
+<div class="alert alert-success" role="alert" id="sub-category-add-success" style="display: none;"></div>
+<div class="alert alert-danger" role="alert" id="sub-category-add-failed" style="display: none;"></div>
+
+<form class="form-horizontal" role="form" action="#" method="post"
+      id="add-sub-category-form" autocomplete="off">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="email" class="col-sm-3 control-label">Category Name <span class="required-field">*</span></label>
+        <div class="col-sm-9">
+            <select class="form-control" name="category_id">
+                <option>Select an option</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email" class="col-sm-3 control-label">Sub Category Name <span class="required-field">*</span></label>
+        <div class="col-sm-9">
+            <select class="form-control" name="sub_category_id">
+                <option>Select an option</option>
+                {% for category in sub_categories %}
+                    <option value="{{ category.id }}">{{ category.sub_category_name }}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email" class="col-sm-3 control-label">SS Category Name <span class="required-field">*</span></label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Sub Category Name" required=""
+                   data-parsley-trigger="change">
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" id="save-sub-category-btn" class="btn btn-success btn-md pull-right"
+                data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing">Create
+        </button>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('#add-sub-category-form').parsley();
+        $("#add-sub-category-form").on('submit', function (e) {
+            e.preventDefault();
+            var f = $(this);
+            if (f.parsley().isValid()) {
+                $.ajax({
+                    url: '/admin/category/ss/category/create',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    beforeSend: function () {
+                        $("#save-sub-category-btn").button('loading');
+                    },
+                    success: function (response) {
+                        if (response.status === true) {
+                            $("#sub-category-add-success").html(response.message);
+                            $("#sub-category-add-success").show();
+                            f[0].reset();
+                            setTimeout(function () {
+                                location.reload();
+                            }, 1500);
+                        } else {
+                            $("#sub-category-add-failed").html(response.message);
+                            $("#sub-category-add-failed").show();
+                            $('#save-sub-category-btn').button('reset');
+                        }
+                    },
+                    error: function () {
+                        setTimeout(function () {
+                            $('#save-sub-category-btn').button('reset');
+                        }, 1500);
+                        $("#sub-category-add-failed").html('Crap! There was something wrong.');
+                    }
+                });
+            } else {
+                console.log('invalid');
+            }
+        });
+    })
+</script>

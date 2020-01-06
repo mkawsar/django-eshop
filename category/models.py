@@ -42,6 +42,7 @@ class SubSubCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
     sub_category = models.ForeignKey(SubCategory, on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=255, blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
