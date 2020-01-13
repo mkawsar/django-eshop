@@ -39,7 +39,8 @@
                             $("#category-add-success").show();
                             f[0].reset();
                             setTimeout(function () {
-                                location.reload();
+                                window.location.href = "{% url 'admin-category:index' %}";
+                                {#location.reload();#}
                             }, 1500);
                         } else {
                             $("#category-add-failed").html(response.message);

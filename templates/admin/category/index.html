@@ -5,30 +5,51 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-content table-responsive table-full-width">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Category Name</th>
-                                <th>Creator</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for category in categories %}
+                    <div id="app">
+                        <div class="card-content table-responsive table-full-width">
+                            <table class="table">
+                                <thead>
                                 <tr>
-                                    <td>{{ forloop.counter }}</td>
-                                    <td>{{ category.name }}</td>
-                                    <td>{{ category.created_by.first_name|title }}</td>
-                                    <td>Action</td>
+                                    <th>#</th>
+                                    <th>Category Name</th>
+                                    <th>Creator</th>
+                                    <th>Actions</th>
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                <tr v-for="(category, index) in categories">
+                                    <td>[[index + 1]]</td>
+                                    <td>[[category.name]]</td>
+                                    <td>[[category.created_by__first_name]]</td>
+                                    <td>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-warning"><i
+                                                class="fa fa-pencil-square-o"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-danger"><i
+                                                class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        var categories = {{ categories|safe }};
+        var app = new Vue({
+            el: '#app',
+            delimiters: ['[[', ']]'],
+            data: {
+                categories: categories
+            },
+            {% comment %}mounted() {
+                console.log(categories[0].created_by__first_name);
+            }{% endcomment %}
+        });
+    </script>
 {% endblock %}

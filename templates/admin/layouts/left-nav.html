@@ -8,10 +8,10 @@
 {% url 'admin-category:ss-category-list' as admin_ss_category_list_url %}
 <div class="sidebar" data-background-color="brown" data-active-color="danger">
     <div class="logo">
-        <a href="/" class="simple-text logo-mini">
+        <a href="{% url 'admin-dashboard:index' %}" class="simple-text logo-mini">
             <img src="{% static 'admin/img/favicon-32x32.png' %}" alt="eShop">
         </a>
-        <a href="/" class="simple-text logo-normal">
+        <a href="{% url 'admin-dashboard:index' %}" class="simple-text logo-normal">
             <img src="{% static 'admin/img/favicon-32x32.png' %}" alt="eShop"> eShop
         </a>
     </div>
