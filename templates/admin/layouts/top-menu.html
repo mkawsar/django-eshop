@@ -35,6 +35,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="#" class="add-category-btn">Add Category</a></li>
 						<li><a href="#" class="add-sub-category-btn">Add Sub Category</a></li>
+						<li><a href="#" class="add-ss-category-btn">Add SS Category</a></li>
 						<li><a href="{% url 'admin-product:create' %}" class="add-product-btn">Add Product</a></li>
 					</ul>
 				</li>
@@ -70,6 +71,23 @@
 			</div>
 			<div class="modal-body modal-body-invite">
 				<div id="add-sub-category"></div>
+			</div>
+			<div class="modal-footer" style="border-top: 0px;">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="add-ss-category-modal" tabindex="-1" role="dialog" aria-labelledby="postLikerLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Add Product Sub Sub Category</h4>
+			</div>
+			<div class="modal-body modal-body-invite">
+				<div id="add-ss-category"></div>
 			</div>
 			<div class="modal-footer" style="border-top: 0px;">
 			</div>

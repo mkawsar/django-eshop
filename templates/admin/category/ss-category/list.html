@@ -1,0 +1,38 @@
+{% extends 'admin/layouts/main.html' %}
+{% block content %}
+    <div class="container-fluid">
+        {% include 'admin/layouts/alert-message.html' %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content table-responsive table-full-width">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>SS Name</th>
+                                <th>Category Name</th>
+                                <th>Sub Category Name</th>
+                                <th>Creator</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for ss_category in ss_categories %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ ss_category.name }}</td>
+                                    <td>{{ ss_category.category.name }}</td>
+                                    <td>{{ ss_category.sub_category.sub_category_name }}</td>
+                                    <td>{{ ss_category.created.first_name|title }}</td>
+                                    <td>Actions</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
