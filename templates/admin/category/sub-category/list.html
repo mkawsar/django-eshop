@@ -5,32 +5,49 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-content table-responsive table-full-width">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Sub Category Name</th>
-                                <th>Category Name</th>
-                                <th>Creator</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                {% for category in categories %}
-                                    <tr>
-                                        <td>{{ forloop.counter }}</td>
-                                        <td>{{ category.sub_category_name }}</td>
-                                        <td>{{ category.category.name }}</td>
-                                        <td>{{ category.created_by.first_name }}</td>
-                                        <td>Action</td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                    <div id="app-sub-category">
+                        <div class="card-content table-responsive table-full-width">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Sub Category Name</th>
+                                    <th>Category Name</th>
+                                    <th>Creator</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="(category, index) in sub_categories">
+                                    <td>[[index + 1]]</td>
+                                    <td>[[category.sub_category_name]]</td>
+                                    <td>[[category.category__name]]</td>
+                                    <td>[[category.created_by__first_name]]</td>
+                                    <td>
+                                        <a href="javascript:void(0)" :data-edit-id="category.id" class="btn btn-sm btn-warning"><i
+                                                class="fa fa-pencil-square-o"></i></a>
+                                        <a href="javascript:void(0)" :data-delete-id="category.id" class="btn btn-sm btn-danger"><i
+                                                class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block script %}
+    <script>
+        var sub_categories = {{ sub_categories|safe }};
+        var app = new Vue({
+            el: '#app-sub-category',
+            delimiters: ['[[', ']]'],
+            data: {
+                sub_categories: sub_categories
+            }
+        });
+    </script>
 {% endblock %}

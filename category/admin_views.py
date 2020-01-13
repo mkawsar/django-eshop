@@ -1,5 +1,6 @@
 import json
 from django.views import generic
+from django.shortcuts import render, HttpResponse
 from django.http import HttpResponse
 from .models import Category, SubCategory, SubSubCategory
 from django.contrib.auth.decorators import login_required
@@ -7,16 +8,14 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class AdminCategoryListView(LoginRequiredMixin, generic.ListView):
+class AdminCategoryListView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'admin/category/index.html'
-    model = Category
-    context_object_name = 'categories'
-    ordering = ['name']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Category List'
-        # context['categories'] = Category.objects.all()
+        context['categories'] = json.dumps(
+            list(Category.objects.values('id', 'name', 'created_by__first_name').order_by('name')))
         return context
 
 
@@ -40,14 +39,14 @@ class AdminCreateCategoryView(LoginRequiredMixin, generic.TemplateView):
                                 content_type="application/json")
 
 
-class AdminSubCategoryListView(LoginRequiredMixin, generic.ListView):
+class AdminSubCategoryListView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'admin/category/sub-category/list.html'
-    model = SubCategory
-    context_object_name = 'categories'
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Sub Category List'
+        context['sub_categories'] = json.dumps(
+            list(SubCategory.objects.values('id', 'created_by__first_name', 'sub_category_name', 'category__name').order_by('sub_category_name')))
         return context
 
 
