@@ -7,7 +7,7 @@
                 <div class="card">
                     <div id="app">
                         <div class="card-content table-responsive table-full-width">
-                            <table class="table">
+                            <table class="table" id="category-table">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -16,19 +16,7 @@
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr v-for="(category, index) in categories">
-                                    <td>[[index + 1]]</td>
-                                    <td>[[category.name]]</td>
-                                    <td>[[category.created_by__first_name]]</td>
-                                    <td>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-warning"><i
-                                                class="fa fa-pencil-square-o"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-danger"><i
-                                                class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>
-                                </tbody>
+                                <tbody></tbody>
                             </table>
                         </div>
                     </div>
@@ -45,11 +33,23 @@
             el: '#app',
             delimiters: ['[[', ']]'],
             data: {
-                categories: categories
+                categories: categories,
+                dataTable: null,
             },
-            {% comment %}mounted() {
-                console.log(categories[0].created_by__first_name);
-            }{% endcomment %}
+            mounted() {
+                this.dataTable = $('#category-table').DataTable({});
+                this.categories.forEach((category, index) => {
+                    this.dataTable.row.add([
+                        index + 1,
+                        category.name,
+                        category.created_by__first_name,
+                        '<a href="javascript:void(0)" class="btn btn-sm btn-warning category-btn" category-data-id="' + category.id + '"><i class="fa fa-pencil-square-o"></i></a> <a href="javascript:void(0)" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></a>',
+                    ]).draw(false)
+                });
+            },
+            methods: {
+
+            }
         });
     </script>
 {% endblock %}
