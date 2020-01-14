@@ -5,34 +5,46 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-content table-responsive table-full-width">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>SS Name</th>
-                                <th>Category Name</th>
-                                <th>Sub Category Name</th>
-                                <th>Creator</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for ss_category in ss_categories %}
+                    <div id="app-ss-category">
+                        <div class="card-content table-responsive table-full-width">
+                            <table class="table">
+                                <thead>
                                 <tr>
-                                    <td>{{ forloop.counter }}</td>
-                                    <td>{{ ss_category.name }}</td>
-                                    <td>{{ ss_category.category.name }}</td>
-                                    <td>{{ ss_category.sub_category.sub_category_name }}</td>
-                                    <td>{{ ss_category.created.first_name|title }}</td>
-                                    <td>Actions</td>
+                                    <th>#</th>
+                                    <th>SS Name</th>
+                                    <th>Category Name</th>
+                                    <th>Sub Category Name</th>
+                                    <th>Creator</th>
+                                    <th>Actions</th>
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(ss_category, index) in ss_categories">
+                                        <td>[[ index + 1 ]]</td>
+                                        <td>[[ ss_category.name ]]</td>
+                                        <td>[[ ss_category.category__name ]]</td>
+                                        <td>[[ ss_category.sub_category__sub_category_name ]]</td>
+                                        <td>[[ ss_category.created__first_name ]]</td>
+                                        <td>Action</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block script %}
+    <script>
+        var ss_categories = {{ ss_categories|safe }};
+        var app = new Vue({
+            el: '#app-ss-category',
+            delimiters: ['[[', ']]'],
+            data: {
+                ss_categories: ss_categories
+            }
+        });
+    </script>
 {% endblock %}

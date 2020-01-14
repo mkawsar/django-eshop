@@ -46,7 +46,8 @@ class AdminSubCategoryListView(LoginRequiredMixin, generic.TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Sub Category List'
         context['sub_categories'] = json.dumps(
-            list(SubCategory.objects.values('id', 'created_by__first_name', 'sub_category_name', 'category__name').order_by('sub_category_name')))
+            list(SubCategory.objects.values('id', 'created_by__first_name', 'sub_category_name',
+                                            'category__name').order_by('sub_category_name')))
         return context
 
 
@@ -71,14 +72,15 @@ class AdminSubCategoryCreateView(LoginRequiredMixin, generic.TemplateView):
                                 content_type="application/json")
 
 
-class AdminSSCategoryListView(LoginRequiredMixin, generic.ListView):
+class AdminSSCategoryListView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'admin/category/ss-category/list.html'
-    model = SubSubCategory
-    context_object_name = 'ss_categories'
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Sub Sub Category'
+        context['ss_categories'] = json.dumps(list(
+            SubSubCategory.objects.values('id', 'name', 'category__name', 'sub_category__sub_category_name',
+                                          'created__first_name')))
         return context
 
 
