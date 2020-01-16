@@ -16,8 +16,25 @@
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                {% for catgory in categories %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ catgory.name }}</td>
+                                        <td>{{ catgory.created_by__first_name }}</td>
+                                        <td>
+                                            <a href="javascript:void(0)" class="btn btn-sm btn-warning category-btn"><i
+                                                    class="fa fa-pencil-square-o"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-sm btn-danger"><i
+                                                    class="fa fa-trash-o"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
                             </table>
+                            {% if categories.has_other_pages %}
+                                {% include "admin/layouts/paginator.html" with page_obj=categories %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -28,27 +45,13 @@
 
 {% block script %}
     <script>
-        var categories = {{ categories|safe }};
         var app = new Vue({
             el: '#app',
             delimiters: ['[[', ']]'],
             data: {
-                categories: categories,
                 dataTable: null,
             },
             mounted() {
-                this.dataTable = $('#category-table').DataTable({});
-                this.categories.forEach((category, index) => {
-                    this.dataTable.row.add([
-                        index + 1,
-                        category.name,
-                        category.created_by__first_name,
-                        '<a href="javascript:void(0)" class="btn btn-sm btn-warning category-btn" category-data-id="' + category.id + '"><i class="fa fa-pencil-square-o"></i></a> <a href="javascript:void(0)" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></a>',
-                    ]).draw(false)
-                });
-            },
-            methods: {
-
             }
         });
     </script>
