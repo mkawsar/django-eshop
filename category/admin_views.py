@@ -20,7 +20,6 @@ def AdminCategoryListView(request):
         categories = paginator.page(1)
     except EmptyPage:
         categories = paginator.page(paginator.num_pages)
-    # return HttpResponse(categories)
     return render(request, 'admin/category/index.html', {'categories': categories, 'title': 'Category List'})
 
 
@@ -109,4 +108,24 @@ class AdminSSCategoryCreateView(LoginRequiredMixin, generic.TemplateView):
                                 content_type="application/json")
         except Exception as e:
             return HttpResponse(json.dumps({'status': False, 'message': 'Failed to add product sub category'}),
+                                content_type="application/json")
+
+
+class AdminCategoryEditView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'admin/category/edit.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categoryID'] = kwargs.get('pk')
+        context['category'] = Category.objects.get(pk=kwargs.get('pk'))
+        return context
+
+    def post(self, request, *args, **kwargs):
+        try:
+            category = Category.objects.filter(pk=kwargs.get('pk'))
+            category.update(name=request.POST.get('name'), category_slug=slugify(request.POST.get('name')))
+            return HttpResponse(json.dumps({'status': True, 'message': 'Product category updated successfully!'}),
+                                content_type="application/json")
+        except Exception as e:
+            return HttpResponse(json.dumps({'status': False, 'message': 'Failed to update product category'}),
                                 content_type="application/json")

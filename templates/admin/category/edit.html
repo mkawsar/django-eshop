@@ -1,0 +1,62 @@
+<div class="alert alert-success" role="alert" id="category-edit-success" style="display: none;"></div>
+<div class="alert alert-danger" role="alert" id="category-edit-failed" style="display: none;"></div>
+
+<form class="form-horizontal" role="form" action="#" method="post"
+      id="edit-category-form" autocomplete="off">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="email" class="col-sm-3 control-label">Category Name <span class="required-field">*</span></label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="name" value="{{ category.name }}" name="name"
+                   placeholder="Category Name" required="" data-parsley-trigger="change">
+        </div>
+    </div>
+
+    <div class="box-footer col-sm-offset-3">
+        <button type="submit" id="update-category-btn" class="btn btn-success btn-md"
+                data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing">Update
+        </button>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('#edit-category-form').parsley();
+        $("#edit-category-form").on('submit', function (e) {
+            e.preventDefault();
+            var f = $(this);
+            if (f.parsley().isValid()) {
+                $.ajax({
+                    url: '{% url 'admin-category:edit-category' categoryID %}',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    beforeSend: function () {
+                        $("#update-category-btn").button('loading');
+                    },
+                    success: function (response) {
+                        if (response.status === true) {
+                            $("#category-edit-success").html(response.message);
+                            $("#category-edit-success").show();
+                            setTimeout(function () {
+                                location.reload();
+                            }, 1500);
+                        } else {
+                            $("#category-edit-failed").html(response.message);
+                            $("#category-edit-failed").show();
+                            $('#update-category-btn').button('reset');
+                        }
+                    },
+                    error: function () {
+                        setTimeout(function () {
+                            $('#update-category-btn').button('reset');
+                        }, 1500);
+                        $("#category-edit-failed").html('Crap! There was something wrong.');
+                    }
+                });
+            } else {
+                console.log('invalid');
+            }
+        });
+    })
+</script>
