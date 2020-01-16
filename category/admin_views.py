@@ -1,22 +1,27 @@
 import json
 from django.views import generic
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from django.http import HttpResponse
+from django.template.defaultfilters import slugify
 from .models import Category, SubCategory, SubSubCategory
 from django.contrib.auth.decorators import login_required
-from django.template.defaultfilters import slugify
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
-class AdminCategoryListView(LoginRequiredMixin, generic.TemplateView):
-    template_name = 'admin/category/index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Category List'
-        context['categories'] = json.dumps(
-            list(Category.objects.values('id', 'name', 'created_by__first_name').order_by('name')))
-        return context
+@login_required
+def AdminCategoryListView(request):
+    category_list = Category.objects.values('id', 'name', 'created_by__first_name').order_by('name')
+    paginator = Paginator(category_list, 10)
+    page = request.GET.get('page', 1)
+    try:
+        categories = paginator.page(page)
+    except PageNotAnInteger:
+        categories = paginator.page(1)
+    except EmptyPage:
+        categories = paginator.page(paginator.num_pages)
+    # return HttpResponse(categories)
+    return render(request, 'admin/category/index.html', {'categories': categories})
 
 
 class AdminCreateCategoryView(LoginRequiredMixin, generic.TemplateView):
