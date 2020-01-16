@@ -21,7 +21,7 @@ def AdminCategoryListView(request):
     except EmptyPage:
         categories = paginator.page(paginator.num_pages)
     # return HttpResponse(categories)
-    return render(request, 'admin/category/index.html', {'categories': categories})
+    return render(request, 'admin/category/index.html', {'categories': categories, 'title': 'Category List'})
 
 
 class AdminCreateCategoryView(LoginRequiredMixin, generic.TemplateView):
