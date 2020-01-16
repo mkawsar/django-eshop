@@ -17,16 +17,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for catgory in categories %}
+                                {% for category in categories %}
                                     <tr>
                                         <td>{{ forloop.counter }}</td>
-                                        <td>{{ catgory.name }}</td>
-                                        <td>{{ catgory.created_by__first_name }}</td>
+                                        <td>{{ category.name }}</td>
+                                        <td>{{ category.created_by__first_name }}</td>
                                         <td>
-                                            <a href="javascript:void(0)" class="btn btn-sm btn-warning category-btn"><i
-                                                    class="fa fa-pencil-square-o"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-sm btn-danger"><i
-                                                    class="fa fa-trash-o"></i></a>
+                                            <a href="javascript:void(0)"
+                                               class="btn btn-sm btn-warning category-edit-btn"
+                                               category-data-id="{{ category.id }}">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                            </a>
+                                            <a href="javascript:void(0)" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -40,6 +44,24 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="edit-category-modal" tabindex="-1" role="dialog" aria-labelledby="postLikerLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Edit Product Category</h4>
+                    </div>
+                    <div class="modal-body modal-body-invite">
+                        <div id="edit-category"></div>
+                    </div>
+                    <div class="modal-footer" style="border-top: 0px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 {% endblock %}
 
@@ -51,8 +73,27 @@
             data: {
                 dataTable: null,
             },
-            mounted() {
-            }
         });
+        $(document).ready(function () {
+            $('.category-edit-btn').click(function (e) {
+                const categoryID = $(this).attr('category-data-id');
+                $("#edit-category-modal").modal('show');
+                var pageUrl = '/admin/category/edit/' + categoryID;
+                $.ajax({
+                    type: "GET",
+                    url: pageUrl,
+                    beforeSend: function () {
+                        $("#edit-category").html('<div class="overlay loader-div"><i class="fa fa-refresh fa-spin"></i></div>');
+                    },
+                    success: function (data) {
+                        $("#edit-category").html(data);
+                    },
+                    error: function () {
+                        $("#edit-category").html("Failed to load data.");
+                    }
+                });
+                e.preventDefault();
+            });
+        })
     </script>
 {% endblock %}
