@@ -28,7 +28,7 @@
                                                category-data-id="{{ category.id }}">
                                                 <i class="fa fa-pencil-square-o"></i>
                                             </a>
-                                            <a href="javascript:void(0)" class="btn btn-sm btn-danger">
+                                            <a href="{% url 'admin-category:delete-category' category.id %}" class="btn btn-sm btn-danger confirm">
                                                 <i class="fa fa-trash-o"></i>
                                             </a>
                                         </td>
@@ -93,6 +93,12 @@
                     }
                 });
                 e.preventDefault();
+            });
+            $(".confirm").confirm({
+                text: "Are you sure you want to delete this data?",
+                confirmButtonClass: "btn-danger",
+                cancelButtonClass: "btn-default",
+                dialogClass: "modal-dialog" // Bootstrap classes for large modal
             });
         })
     </script>

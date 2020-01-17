@@ -1,7 +1,9 @@
 import json
+from django.urls import reverse
 from django.views import generic
+from django.contrib import messages
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template.defaultfilters import slugify
 from .models import Category, SubCategory, SubSubCategory
 from django.contrib.auth.decorators import login_required
@@ -129,3 +131,16 @@ class AdminCategoryEditView(LoginRequiredMixin, generic.TemplateView):
         except Exception as e:
             return HttpResponse(json.dumps({'status': False, 'message': 'Failed to update product category'}),
                                 content_type="application/json")
+
+
+@login_required
+def AdminCategoryDelete(request, category_id):
+    try:
+        SubSubCategory.objects.filter(category_id=category_id).delete()
+        SubCategory.objects.filter(category_id=category_id).delete()
+        Category.objects.filter(id=category_id).delete()
+        messages.success(request, 'Product category deleted successfully!')
+        return HttpResponseRedirect(reverse('admin-category:index'))
+    except Exception as e:
+        messages.error(request, 'Failed to product category delete!')
+        return HttpResponseRedirect(reverse('admin-category:index'))
