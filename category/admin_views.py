@@ -3,11 +3,11 @@ from django.urls import reverse
 from django.views import generic
 from django.contrib import messages
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
 from django.template.defaultfilters import slugify
 from .models import Category, SubCategory, SubSubCategory
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
@@ -78,16 +78,18 @@ class AdminSubCategoryCreateView(LoginRequiredMixin, generic.TemplateView):
                                 content_type="application/json")
 
 
-class AdminSSCategoryListView(LoginRequiredMixin, generic.TemplateView):
-    template_name = 'admin/category/ss-category/list.html'
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Sub Sub Category'
-        context['ss_categories'] = json.dumps(list(
-            SubSubCategory.objects.values('id', 'name', 'category__name', 'sub_category__sub_category_name',
-                                          'created__first_name')))
-        return context
+@login_required
+def AdminSSCategoryListView(request):
+    ss_categories_list = SubSubCategory.objects.values('id', 'name', 'category__name', 'sub_category__sub_category_name', 'created__first_name')
+    paginator = Paginator(ss_categories_list, 10)
+    page = request.GET.get('page', 1)
+    try:
+        ss_categories = paginator.page(page)
+    except PageNotAnInteger:
+        ss_categories = paginator.page(1)
+    except EmptyPage:
+        ss_categories = paginator.page(paginator.num_pages)
+    return render(request, 'admin/category/ss-category/list.html', {'title': 'Sub Sub Category', 'ss_categories': ss_categories})
 
 
 class AdminSSCategoryCreateView(LoginRequiredMixin, generic.TemplateView):
@@ -144,3 +146,15 @@ def AdminCategoryDelete(request, category_id):
     except Exception as e:
         messages.error(request, 'Failed to product category delete!')
         return HttpResponseRedirect(reverse('admin-category:index'))
+
+
+
+@login_required
+def AdminDeleteSSCategory(request, ss_category_id):
+    try:
+        SubSubCategory.objects.filter(id=ss_category_id).delete()
+        messages.success(request, 'Product category deleted successfully!')
+        return HttpResponseRedirect(reverse('admin-category:ss-category-list'))
+    except Exception as e:
+        messages.error(request, 'Failed to product ss category delete!')
+        return HttpResponseRedirect(reverse('admin-category:ss-category-list'))
