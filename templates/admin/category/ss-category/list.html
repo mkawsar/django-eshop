@@ -19,16 +19,30 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(ss_category, index) in ss_categories">
-                                        <td>[[ index + 1 ]]</td>
-                                        <td>[[ ss_category.name ]]</td>
-                                        <td>[[ ss_category.category__name ]]</td>
-                                        <td>[[ ss_category.sub_category__sub_category_name ]]</td>
-                                        <td>[[ ss_category.created__first_name ]]</td>
-                                        <td>Action</td>
-                                    </tr>
+                                    {% for ss_category in ss_categories %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ ss_category.name }}</td>
+                                            <td>{{ ss_category.category__name }}</td>
+                                            <td>{{ ss_category.sub_category__sub_category_name }}</td>
+                                            <td>{{ ss_category.created__first_name }}</td>
+                                            <td>
+                                                <a href="javascript:void(0)"
+                                                   class="btn btn-sm btn-warning category-edit-btn"
+                                                   ss-category-data-id="{{ ss_category.id }}">
+                                                    <i class="fa fa-pencil-square-o"></i>
+                                                </a>
+                                                <a href="{% url 'admin-category:delete-ss-category' ss_category.id %}" class="btn btn-sm btn-danger confirm">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
+                            {% if ss_categories.has_other_pages %}
+                                {% include "admin/layouts/paginator.html" with page_obj=ss_categories %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -38,13 +52,18 @@
 {% endblock %}
 {% block script %}
     <script>
-        var ss_categories = {{ ss_categories|safe }};
         var app = new Vue({
             el: '#app-ss-category',
-            delimiters: ['[[', ']]'],
-            data: {
-                ss_categories: ss_categories
-            }
+            delimiters: ['[[', ']]']
+        });
+
+        $(document).ready(function () {
+            $(".confirm").confirm({
+                text: "Are you sure you want to delete this data?",
+                confirmButtonClass: "btn-danger",
+                cancelButtonClass: "btn-default",
+                dialogClass: "modal-dialog" // Bootstrap classes for large modal
+            });
         });
     </script>
 {% endblock %}
