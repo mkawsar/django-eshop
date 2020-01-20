@@ -18,20 +18,27 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="(category, index) in sub_categories">
-                                    <td>[[index + 1]]</td>
-                                    <td>[[category.sub_category_name]]</td>
-                                    <td>[[category.category__name]]</td>
-                                    <td>[[category.created_by__first_name]]</td>
-                                    <td>
-                                        <a href="javascript:void(0)" :data-edit-id="category.id" class="btn btn-sm btn-warning"><i
-                                                class="fa fa-pencil-square-o"></i></a>
-                                        <a href="javascript:void(0)" :data-delete-id="category.id" class="btn btn-sm btn-danger"><i
-                                                class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>
+                                {% for sub_category in sub_categories %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ sub_category.sub_category_name }}</td>
+                                        <td>{{ sub_category.category__name }}</td>
+                                        <td>{{ sub_category.created_by__first_name }}</td>
+                                        <td>
+                                            <a href="javascript:void(0)" class="btn btn-sm btn-warning">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                            </a>
+                                            <a href="{% url 'admin-category:delete-sub-category' sub_category.id %}"
+                                               class="btn btn-sm btn-danger confirm"> <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
                                 </tbody>
                             </table>
+                            {% if sub_categories.has_other_pages %}
+                                {% include "admin/layouts/paginator.html" with page_obj=sub_categories %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -41,13 +48,17 @@
 {% endblock %}
 {% block script %}
     <script>
-        var sub_categories = {{ sub_categories|safe }};
         var app = new Vue({
             el: '#app-sub-category',
             delimiters: ['[[', ']]'],
-            data: {
-                sub_categories: sub_categories
-            }
+        });
+        $(document).ready(function () {
+            $(".confirm").confirm({
+                text: "Are you sure you want to delete this data?",
+                confirmButtonClass: "btn-danger",
+                cancelButtonClass: "btn-default",
+                dialogClass: "modal-dialog" // Bootstrap classes for large modal
+            });
         });
     </script>
 {% endblock %}
