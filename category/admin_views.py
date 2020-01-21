@@ -13,7 +13,8 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 @login_required
 def AdminCategoryListView(request):
-    category_list = Category.objects.values('id', 'name', 'created_by__first_name').order_by('name')
+    category_list = Category.objects.values(
+        'id', 'name', 'created_by__first_name').order_by('name')
     paginator = Paginator(category_list, 10)
     page = request.GET.get('page', 1)
     try:
@@ -45,16 +46,30 @@ class AdminCreateCategoryView(LoginRequiredMixin, generic.TemplateView):
                                 content_type="application/json")
 
 
-class AdminSubCategoryListView(LoginRequiredMixin, generic.TemplateView):
-    template_name = 'admin/category/sub-category/list.html'
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Sub Category List'
-        context['sub_categories'] = json.dumps(
-            list(SubCategory.objects.values('id', 'created_by__first_name', 'sub_category_name',
-                                            'category__name').order_by('sub_category_name')))
-        return context
+# class AdminSubCategoryListView(LoginRequiredMixin, generic.TemplateView):
+#     template_name = 'admin/category/sub-category/list.html'
+#
+#     def get_context_data(self, *args, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['title'] = 'Sub Category List'
+#         context['sub_categories'] = json.dumps(
+#             list(SubCategory.objects.values('id', 'created_by__first_name', 'sub_category_name',
+#                                             'category__name').order_by('sub_category_name')))
+#         return context
+@login_required
+def AdminSubCategoryListView(request):
+    sub_category_list = SubCategory.objects.values('id', 'created_by__first_name', 'sub_category_name',
+                                                   'category__name').order_by('sub_category_name')
+    paginator = Paginator(sub_category_list, 10)
+    page = request.GET.get('page', 1)
+    try:
+        sub_categories = paginator.page(page)
+    except PageNotAnInteger:
+        sub_categories = paginator.page(1)
+    except EmptyPage:
+        sub_categories = paginator.page(paginator.num_pages)
+    return render(request, 'admin/category/sub-category/list.html',
+                  {'title': 'Sub Category List', 'sub_categories': sub_categories})
 
 
 class AdminSubCategoryCreateView(LoginRequiredMixin, generic.TemplateView):
@@ -80,7 +95,8 @@ class AdminSubCategoryCreateView(LoginRequiredMixin, generic.TemplateView):
 
 @login_required
 def AdminSSCategoryListView(request):
-    ss_categories_list = SubSubCategory.objects.values('id', 'name', 'category__name', 'sub_category__sub_category_name', 'created__first_name')
+    ss_categories_list = SubSubCategory.objects.values(
+        'id', 'name', 'category__name', 'sub_category__sub_category_name', 'created__first_name')
     paginator = Paginator(ss_categories_list, 10)
     page = request.GET.get('page', 1)
     try:
@@ -89,7 +105,8 @@ def AdminSSCategoryListView(request):
         ss_categories = paginator.page(1)
     except EmptyPage:
         ss_categories = paginator.page(paginator.num_pages)
-    return render(request, 'admin/category/ss-category/list.html', {'title': 'Sub Sub Category', 'ss_categories': ss_categories})
+    return render(request, 'admin/category/ss-category/list.html',
+                  {'title': 'Sub Sub Category', 'ss_categories': ss_categories})
 
 
 class AdminSSCategoryCreateView(LoginRequiredMixin, generic.TemplateView):
@@ -99,7 +116,8 @@ class AdminSSCategoryCreateView(LoginRequiredMixin, generic.TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Sub Sub Category'
         context['categories'] = Category.objects.all().order_by('name')
-        context['sub_categories'] = SubCategory.objects.all().order_by('sub_category_name')
+        context['sub_categories'] = SubCategory.objects.all().order_by(
+            'sub_category_name')
         return context
 
     def post(self, request, *args, **kwargs):
@@ -148,13 +166,24 @@ def AdminCategoryDelete(request, category_id):
         return HttpResponseRedirect(reverse('admin-category:index'))
 
 
-
 @login_required
 def AdminDeleteSSCategory(request, ss_category_id):
     try:
         SubSubCategory.objects.filter(id=ss_category_id).delete()
-        messages.success(request, 'Product category deleted successfully!')
+        messages.success(request, 'Product ss category deleted successfully!')
         return HttpResponseRedirect(reverse('admin-category:ss-category-list'))
     except Exception as e:
         messages.error(request, 'Failed to product ss category delete!')
         return HttpResponseRedirect(reverse('admin-category:ss-category-list'))
+
+
+@login_required
+def AdminDeleteSubCategory(request, sub_category_id):
+    try:
+        SubSubCategory.objects.filter(sub_category_id=sub_category_id).delete()
+        SubCategory.objects.filter(id=sub_category_id).delete()
+        messages.success(request, 'Product sub category deleted successfully!')
+        return HttpResponseRedirect(reverse('admin-category:sub-category-list'))
+    except Exception as e:
+        messages.error(request, 'Failed to product sub category delete!')
+        return HttpResponseRedirect(reverse('admin-category:sub-category-list'))
