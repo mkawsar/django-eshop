@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import slugify
 from django.shortcuts import redirect, HttpResponse
-from category.models import Category, SubCategory
+from category.models import Category, SubCategory, SubSubCategory
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
 from django.http import JsonResponse
@@ -92,3 +92,9 @@ class ProductImage(LoginRequiredMixin, generic.TemplateView):
 def GetProductSubCategory(request, category_id):
     sub_categories = SubCategory.objects.filter(category_id=category_id).all().order_by('sub_category_name')
     return HttpResponse(serializers.serialize('json', sub_categories))
+
+
+@login_required
+def GetProductSSCategory(request, sub_category_id):
+    ss_categories = SubSubCategory.objects.filter(sub_category=sub_category_id).all().order_by('name')
+    return HttpResponse(serializers.serialize('json', ss_categories))

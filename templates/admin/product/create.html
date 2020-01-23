@@ -36,12 +36,9 @@
                             <div class="form-group">
                                 <label for="" class="control-label col-sm-2">Sub Category <span class="required-field">*</span></label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" name="sub_category_id" data-parsley-required="true">
+                                    <select class="form-control" name="sub_category_id" data-parsley-required="true" @change="subCategoryIDOnChange($event)">
                                         <option value="">Select an option</option>
                                         <option v-for="sub_category in sub_categories" :value="sub_category.id">[[ sub_category.sub_category_name ]]</option>
-                                        <!-- {% for category in sub_categories %}
-                                            <option value="{{ category.id }}">{{ category.sub_category_name }}</option>
-                                        {% endfor %} -->
                                     </select>
                                 </div>
                             </div>
@@ -51,9 +48,7 @@
                                 <div class="col-sm-10">
                                     <select class="form-control" name="sub_sub_category_id" data-parsley-required="true">
                                         <option value="">Select an option</option>
-                                        {% for category in sub_categories %}
-                                            <option value="{{ category.id }}">{{ category.sub_category_name }}</option>
-                                        {% endfor %}
+                                        <option v-for="ss_category in ss_categories" :value="ss_category.id">[[ ss_category.name ]]</option>
                                     </select>
                                 </div>
                             </div>
@@ -96,20 +91,36 @@
             el: '#app-add-product',
             delimiters: ['[[', ']]'],
             data: {
-                sub_categories: []
+                sub_categories: [],
+                ss_categories: []
             },
             methods: {
                 categoryIdOnChange(e) {
                     var $this = this;
                     $this.sub_categories = [];
+                    $this.ss_categories = [];
                     const categoryID = e.target.value;
                     const url = '/admin/product/sub/category/' + categoryID;
                     axios.get(url)
                     .then(res => {
-                        const sub_categories = res.data;
-                        sub_categories.forEach((value, index) => {
+                        res.data.forEach((value, index) => {
                             $this.sub_categories.push({'id': value.pk, 'sub_category_name': value.fields.sub_category_name})
                         })
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+                },
+
+                subCategoryIDOnChange(e) {
+                    var $this = this;
+                    const subCategoryID = e.target.value;
+                    const url = '/admin/product/ss/category/' + subCategoryID;
+                    axios.get(url)
+                    .then(res => {
+                        res.data.forEach((item, i) => {
+                            $this.ss_categories.push({'id': item.pk, 'name': item.fields.name});
+                        });
                     })
                     .catch(err => {
                         console.log(err);
