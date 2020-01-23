@@ -6,10 +6,13 @@ from django.conf import settings
 from .models import Product, ProductImages
 from django.views import generic
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import slugify
 from django.shortcuts import redirect, HttpResponse
 from category.models import Category, SubCategory
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core import serializers
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -82,3 +85,10 @@ class ProductImage(LoginRequiredMixin, generic.TemplateView):
                     return HttpResponse(
                         json.dumps({'status': True, 'message': 'Product images uploaded successfully!'}),
                         content_type="application/json")
+
+
+# Get product sub category using proudct category for add product
+@login_required
+def GetProductSubCategory(request, category_id):
+    sub_categories = SubCategory.objects.filter(category_id=category_id).all().order_by('sub_category_name')
+    return HttpResponse(serializers.serialize('json', sub_categories))

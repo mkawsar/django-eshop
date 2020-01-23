@@ -8,4 +8,5 @@ urlpatterns = [
     path('create', ProductAddView.as_view(), name='create'),
     path('details/image/<int:pk>/', ProductImageUpload.as_view(), name='product-image'),
     path('details/image/upload/<int:pk>/', ProductImage.as_view(), name='product-image-upload'),
+    path('sub/category/<category_id>', GetProductSubCategory, name='get-product-sub-category')
 ]
