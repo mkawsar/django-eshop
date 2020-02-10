@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'account.apps.AccountConfig',
     'product.apps.ProductConfig',
-    'category.apps.CategoryConfig'
+    'category.apps.CategoryConfig',
+    'payment.apps.PaymentConfig'
 ]
 
 MIDDLEWARE = [
@@ -142,3 +143,6 @@ LOGOUT_REDIRECT_URL = '/user/login'
 # Media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')

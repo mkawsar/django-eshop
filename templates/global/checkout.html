@@ -5,6 +5,7 @@
         <div class="flat-checkout">
             <form action="#" class="form-checkout">
                 <div class="container">
+                    {% include 'layouts/alert-message.html' %}
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="buyer-info checkout-border">
@@ -110,7 +111,10 @@
                                         lorem.
                                     </p>
                                     <div class="img-payment-methods">
-                                        <img src="{% static 'images/checkout/01.png' %}" alt="images">
+                                        <a href="{% url 'payment:stripe-payment-view' %}?amount=50" id="stripe-payment">
+                                            <img src="{% static 'images/checkout/stripe.png' %}" style="height: 40px"
+                                                 alt="images">
+                                        </a>
                                     </div>
                                     <div class="form-gr">
                                         <label>Card Number :</label>

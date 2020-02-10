@@ -1,0 +1,35 @@
+{% extends 'layouts/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="flat-row-half">
+        <div class="flat-checkout">
+            <form action="{% url 'payment:stripe-payment-charge' %}" method="post" class="form-checkout">
+                {% csrf_token %}
+                <input type="hidden" value="{{ amount }}" name="amount">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-12">
+                            <div class="buyer-info checkout-border">
+                                <div class="bg d-flex justify-content-between">
+                                    <div class="title">
+                                        <a href="#">BUYER INFO</a>
+                                    </div>
+                                    <div class="title">
+                                        <a href="#">LOGIN HERE</a>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                            data-key="{{ key }}"
+                                            data-description="product buy payment"
+                                            data-amount={{ amount }}00
+                                            data-locale="auto"></script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
