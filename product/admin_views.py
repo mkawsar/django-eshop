@@ -35,11 +35,11 @@ class ProductAddView(LoginRequiredMixin, generic.TemplateView):
         string = 'Add Product'
         context['title'] = string.upper()
         context['categories'] = Category.objects.all().order_by('name')
-        context['sub_categories'] = SubCategory.objects.all().order_by('sub_category_name')
         return context
 
     def post(self, request):
         product = Product(created_by_id=request.user.id, product_name=request.POST.get('name'),
+                          product_title=request.POST.get('title'),
                           product_description=request.POST.get('product_details'),
                           category_id=request.POST.get('category_id'),
                           sub_category_id=request.POST.get('sub_category_id'))

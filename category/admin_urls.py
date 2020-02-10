@@ -1,5 +1,5 @@
-from django.urls import path
 from .admin_views import *
+from django.urls import path
 
 app_name = 'admin-category'
 

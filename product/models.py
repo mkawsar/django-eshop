@@ -10,7 +10,7 @@ class Product(models.Model):
     sub_category = models.ForeignKey(SubCategory, on_delete=models.DO_NOTHING)
     sub_sub_category = models.ForeignKey(SubSubCategory, on_delete=models.DO_NOTHING)
     product_name = models.CharField(max_length=255, null=True, blank=True)
-    product_title = models.CharField(max_length=255, null=True, blank=True)
+    product_title = models.TextField(blank=True, null=True)
     quantity = models.CharField(max_length=100, null=True, blank=True)
     purchase_price = models.CharField(max_length=100, null=True, blank=True)
     sell_price = models.CharField(max_length=100, null=True, blank=True)

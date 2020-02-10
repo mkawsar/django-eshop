@@ -1,82 +1,115 @@
 {% extends 'admin/layouts/main.html' %}
 {% block content %}
-<div class="container-fluid">
-    {% include 'admin/layouts/alert-message.html' %}
-    <div class="row">
-        <div class="col-md-12">
-            <div id="app-add-product">
-                <div class="card">
-                    <div class="card-content">
-                        <form class="form-horizontal" action="{% url 'admin-product:create' %}" method="post" id="product-add-form" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label for="" class="control-label col-sm-2">Product Name <span class="required-field">*</span></label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="name" class="form-control" placeholder="Product Name" required>
+    <div class="container-fluid">
+        {% include 'admin/layouts/alert-message.html' %}
+        <div class="row">
+            <div class="col-md-12">
+                <div id="app-add-product">
+                    <div class="card">
+                        <div class="card-content">
+                            <form class="form-horizontal" action="{% url 'admin-product:create' %}" method="post"
+                                  id="product-add-form" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="" class="control-label col-sm-2">Product Name <span
+                                            class="required-field">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="name" class="form-control" placeholder="Product Name"
+                                               required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="description"class="control-label col-sm-2">Description <span class="required-field">*</span></label>
-                                <div class="col-sm-10">
-                                    <textarea name="description" class="form-control" placeholder="Product Description" required="required" data-parsley-required="true"></textarea>
+                                <div class="form-group">
+                                    <label for="description" class="control-label col-sm-2">Title <span
+                                            class="required-field">*</span></label>
+                                    <div class="col-sm-10">
+                                        <textarea name="title" class="form-control" placeholder="Product Title"
+                                                  required="required" data-parsley-required="true"></textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="control-label col-sm-2">Category <span class="required-field">*</span></label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" name="category_id" @change="categoryIdOnChange($event)" data-parsley-required="true">
-                                        <option value="">Select an option</option>
-                                        {% for category in categories %}
-                                            <option value="{{ category.id }}">{{ category.name }}</option>
-                                        {% endfor %}
-                                    </select>
+                                <div class="form-group">
+                                    <label for="" class="control-label col-sm-2">Category <span
+                                            class="required-field">*</span></label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="category_id"
+                                                @change="categoryIdOnChange($event)" data-parsley-required="true">
+                                            <option value="">Select an option</option>
+                                            {% for category in categories %}
+                                                <option value="{{ category.id }}">{{ category.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="" class="control-label col-sm-2">Sub Category <span class="required-field">*</span></label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" name="sub_category_id" data-parsley-required="true" @change="subCategoryIDOnChange($event)">
-                                        <option value="">Select an option</option>
-                                        <option v-for="sub_category in sub_categories" :value="sub_category.id">[[ sub_category.sub_category_name ]]</option>
-                                    </select>
+                                <div class="form-group">
+                                    <label for="" class="control-label col-sm-2">Sub Category <span
+                                            class="required-field">*</span></label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="sub_category_id" data-parsley-required="true"
+                                                @change="subCategoryIDOnChange($event)">
+                                            <option value="">Select an option</option>
+                                            <option v-for="sub_category in sub_categories" :value="sub_category.id">[[
+                                                sub_category.sub_category_name ]]
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="" class="control-label col-sm-2">SS Category <span class="required-field">*</span></label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" name="sub_sub_category_id" data-parsley-required="true">
-                                        <option value="">Select an option</option>
-                                        <option v-for="ss_category in ss_categories" :value="ss_category.id">[[ ss_category.name ]]</option>
-                                    </select>
+                                <div class="form-group">
+                                    <label for="" class="control-label col-sm-2">SS Category <span
+                                            class="required-field">*</span></label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="sub_sub_category_id"
+                                                data-parsley-required="true">
+                                            <option value="">Select an option</option>
+                                            <option v-for="ss_category in ss_categories" :value="ss_category.id">[[
+                                                ss_category.name ]]
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="" class="control-label col-sm-2">Details <span class="required-field">*</span></label>
-                                <div class="col-sm-10">
-                                    <textarea name="product_details" class="form-control" id="product-details" placeholder="Product Details" required></textarea>
+                                <div class="form-group">
+                                    <label for="" class="control-label col-sm-2">Product Size <span
+                                            class="required-field">*</span></label>
+                                    <div class="col-sm-10">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" value="" required>Option 1
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" value="2">Option 2
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" value="3">Option 3
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2">
-                                    <button type="submit" class="btn btn-success btn-outfile">Submit</button>
+
+                                <div class="form-group">
+                                    <label for="" class="control-label col-sm-2">Details <span
+                                            class="required-field">*</span></label>
+                                    <div class="col-sm-10">
+                                        <textarea name="product_details" class="form-control" id="product-details"
+                                                  placeholder="Product Details" required></textarea>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2">
+                                        <button type="submit" class="btn btn-success btn-outfile">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 {% block script %}
     {% load static %}
     <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#product-add-form').parsley();
             CKEDITOR.editorConfig = function (config) {
                 config.language = 'es';
@@ -102,29 +135,36 @@
                     const categoryID = e.target.value;
                     const url = '/admin/product/sub/category/' + categoryID;
                     axios.get(url)
-                    .then(res => {
-                        res.data.forEach((value, index) => {
-                            $this.sub_categories.push({'id': value.pk, 'sub_category_name': value.fields.sub_category_name})
+                        .then(res => {
+                            res.data.forEach((value, index) => {
+                                $this.sub_categories.push({
+                                    'id': value.pk,
+                                    'sub_category_name': value.fields.sub_category_name
+                                });
+                            })
                         })
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
+                        .catch(err => {
+                            console.log(err);
+                        })
                 },
 
                 subCategoryIDOnChange(e) {
                     var $this = this;
                     const subCategoryID = e.target.value;
+                    $this.ss_categories = [];
                     const url = '/admin/product/ss/category/' + subCategoryID;
                     axios.get(url)
-                    .then(res => {
-                        res.data.forEach((item, i) => {
-                            $this.ss_categories.push({'id': item.pk, 'name': item.fields.name});
-                        });
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
+                        .then(res => {
+                            res.data.forEach((item, i) => {
+                                $this.ss_categories.push({
+                                    'id': item.pk,
+                                    'name': item.fields.name
+                                });
+                            });
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
                 }
             }
         });

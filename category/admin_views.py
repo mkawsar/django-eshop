@@ -46,16 +46,6 @@ class AdminCreateCategoryView(LoginRequiredMixin, generic.TemplateView):
                                 content_type="application/json")
 
 
-# class AdminSubCategoryListView(LoginRequiredMixin, generic.TemplateView):
-#     template_name = 'admin/category/sub-category/list.html'
-#
-#     def get_context_data(self, *args, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Sub Category List'
-#         context['sub_categories'] = json.dumps(
-#             list(SubCategory.objects.values('id', 'created_by__first_name', 'sub_category_name',
-#                                             'category__name').order_by('sub_category_name')))
-#         return context
 @login_required
 def AdminSubCategoryListView(request):
     sub_category_list = SubCategory.objects.values('id', 'created_by__first_name', 'sub_category_name',
