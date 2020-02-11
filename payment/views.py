@@ -1,6 +1,7 @@
 import stripe
 from django.urls import reverse
 from django.conf import settings
+from django.views import generic
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
@@ -9,10 +10,21 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 # Create your views here.
-def stripe_payment_view(request):
-    amount = request.GET.get('amount')
-    stripe_key = settings.STRIPE_PUBLISHABLE_KEY
-    return render(request, 'global/stripe-payment.html', {'amount': amount, 'key': stripe_key})
+class StripePaymentView(generic.TemplateView):
+    template_name = 'global/stripe-payment.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['key'] = settings.STRIPE_PUBLISHABLE_KEY
+        context['amount'] = self.amount
+        return context
+
+    @property
+    def amount(self):
+        if self.request.GET.get('amount'):
+            return self.request.GET.get('amount')
+        else:
+            return 0
 
 
 def stripe_payment_charge(request):  # new
