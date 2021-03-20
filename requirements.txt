@@ -1,6 +1,6 @@
 Django==3.0
 django-extensions==2.2.5
-Jinja2==2.10.3
+Jinja2==2.11.3
 Pillow==6.2.1
 pipdeptree==0.13.2
 psycopg2==2.8.4
